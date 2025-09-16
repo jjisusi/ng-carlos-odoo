@@ -8,5 +8,9 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'ng-carlos-odoo';
+  title = 'prueba';
+
+  public uploadCatalog(){
+    alert("upload catalogo");
+  }
 }
