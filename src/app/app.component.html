@@ -25,7 +25,7 @@
                     <li>
                         <div class="form-group">
                             <label>Sube tu catálogo CSV y pasa al siguiente paso</label>
-                            <input class="d-block" type="file" id="fuCatalog" accept=".csv" (change)="uploadCatalog()" />
+                            <input class="d-block" type="file" id="fuCatalog" accept=".csv" (change)="uploadCatalog($event)" />
                         </div>
                     </li>
                 </ol>
@@ -37,7 +37,7 @@
                     <div class="col-6 form-group">
 
                         <label>Sube tu factura CSV</label>
-                        <input class="d-block" type="file" id="fuInvoice" accept=".csv" onchange="Page.uploadInvoice()" />
+                        <input class="d-block" type="file" id="fuInvoice" accept=".csv" (change)="uploadInvoice($event)" />
                         <!-- <textarea id="txtInvoice" class="form-control" rows="10">                            
                         </textarea>
                         <input type="button" id="btnInvoice" onclick="uploadInvoice()" value="Subir"/> -->
@@ -47,7 +47,7 @@
                 <pre id="articles"></pre>
             </div>
             <div class="tab-pane fade" id="updates" role="tabpanel" aria-labelledby="updates-tab">
-                <input id="btnUpdates" type="button" value="Cambios" onclick="Page.generateUpdates()">
+                <input id="btnUpdates" type="button" value="Cambios" (click)="generateUpdates($event)">
                 <pre id="updates"></pre>
             </div>
             <div class="tab-pane fade" id="consolidate" role="tabpanel" aria-labelledby="consolidate-tab">
