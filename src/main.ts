@@ -38,7 +38,5 @@ Array.prototype.toTable = function <T>(this: T[], keys?: (keyof T)[]): string {
 
     return `<table class="table table-sm table-striped">${thead}${tbody}</table>`;
   }
-
-
 };
 
