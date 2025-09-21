@@ -1,4 +1,4 @@
-export class InvoiceLine {
+export class FacturaLinea {
   Referencia: any;
   Articulo: any;
   Cantidad: any;
@@ -9,7 +9,7 @@ export class InvoiceLine {
     this.Referencia = json.Referencia;
     this.Articulo = json.Articulo;
     this.Cantidad = json.Cantidad;
-    this.Precio = json.Precio;
+    this.Precio = json.PrecioCoste;
     this.IVA = json.IVA;
     this.Descuento = json.Descuento || 0;
   }

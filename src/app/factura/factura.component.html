@@ -1,0 +1,86 @@
+<form>
+    <div class="row">
+        <div class="col-6 form-group">
+
+            <label>Sube tu factura CSV</label>
+            <input class="d-block" type="file" id="fuInvoice" accept=".csv" (change)="uploadInvoice($event)" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 form-group">
+            <textarea id="txtInvoice" class="form-control" rows="10"></textarea>
+            <input type="button" id="btnInvoice" (click)="uploadInvoiceFromText()" value="Extraer datos" />
+        </div>
+    </div>
+</form>
+<div id="desglose" class="w-25">
+    <table class="table table-sm table-stripped">
+        <thead>
+            <th class="text-right">IVA</th>
+            <th class="text-right">Importe</th>
+            <th class="text-right">Cuota</th>
+            <th class="text-right">Total</th>
+        </thead>
+        <tbody>
+            @for (item of this.factura.Desglose; track item.IVA) {
+            <tr>
+                <td class="text-right">
+                    {{item.IVA}}
+                </td>
+                <td class="text-right">
+                    {{item.Importe}}
+                </td>
+                <td class="text-right">
+                    {{item.Cuota}}
+                </td>
+                <td class="text-right">
+                    {{item.Total}}
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div id="articles">
+    <table class="table table-sm table-stripped">
+        <thead>
+            <tr>
+                <th class="text-left">Ref</th>
+                <th class="text-left">Artículo</th>
+                <th class="text-left">Cantidad</th>
+                <th class="text-right">Precio</th>
+                <th class="text-right">IVA</th>
+                <th class="text-right">DTO</th>
+                <th class="text-right">Importe</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (producto of this.factura.lineas; track producto.Referencia) {
+            <tr>
+                <td class="text-left">
+                    {{producto.Referencia}}
+                </td>
+                <td class="text-left">
+                    {{producto.Articulo}}
+                </td>
+                <td class="text-right">
+                    {{producto.Cantidad}}
+                </td>
+                <td class="text-right">
+                    {{producto.Precio}}
+                </td>
+                <td class="text-right">
+                    {{producto.IVA}}
+                </td>
+                <td class="text-right">
+                    {{producto.Descuento}}
+                </td>
+                <td class="text-right">
+                    {{producto.Importe}}
+                </td>
+            </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
