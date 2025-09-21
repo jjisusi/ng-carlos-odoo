@@ -1,4 +1,4 @@
-    <div class="container">
+    <div class="container-fluid">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#tabCatalogo" type="button"
@@ -20,17 +20,7 @@
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="tabCatalogo" role="tabpanel" aria-labelledby="home-tab">
-                <ol>
-                    <li>Exporta tu catálogo de artículos (con el check de importación activado) en formato csv</li>
-                    <li>
-                        <div class="form-group">
-                            <label>Sube tu catálogo CSV y pasa al siguiente paso</label>
-                            <input class="d-block" type="file" id="fuCatalog" accept=".csv" (change)="uploadCatalog($event)" />
-                        </div>
-                    </li>
-                </ol>
-
-                <pre id="catalogo"></pre>
+                <app-catalogo></app-catalogo>
             </div>
             <div class="tab-pane fade" id="invoice" role="tabpanel" aria-labelledby="invoice-tab">
                 <form class="row">

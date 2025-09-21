@@ -1,0 +1,45 @@
+<ol>
+    <li>Exporta tu catálogo de artículos (con el check de importación activado) en formato csv</li>
+    <li>
+        <div class="form-group">
+            <label>Sube tu catálogo CSV y pasa al siguiente paso</label>
+            <input class="d-block" type="file" id="fuCatalog" accept=".csv" (change)="upload($event)" />
+        </div>
+    </li>
+</ol>
+
+<pre id="catalogo">
+    <table class="table table-stripped">
+        <thead>
+            <tr>
+                <th class="text-left">Descripción</th>
+                <th class="text-left">Referencia</th>
+                <th class="text-right">Precio (coste)</th>
+                <th class="text-right">Precio (venta)</th>
+                <th class="text-right">IVA</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (producto of this.catalogo.Productos; track producto.id) {
+            <tr>
+                <td class="text-left">
+                    {{producto.Descripcion}}
+                </td>
+                <td class="text-left">
+                    {{producto.Referencia}}
+                </td>
+                <td class="text-right">
+                    {{producto.PrecioCoste}}
+                </td>
+                <td class="text-right">
+                    {{producto.PrecioVenta}}
+                </td>
+                <td class="text-right">
+                    {{producto.IVA}}
+                </td>
+            </tr>
+
+            }
+        </tbody>
+    </table>
+</pre>
