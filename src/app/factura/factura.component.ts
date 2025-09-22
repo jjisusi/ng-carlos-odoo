@@ -72,13 +72,14 @@ export class FacturaComponent {
         const invoiceLines = [];
         const logs = [];
 
-        const regexSinDto = /^([A-Z\d]+)\s+(.+?)\s+(\d+)\s+([\d.,]+)(?:\s+([\d.,]+)\s*%?)?\s+(\d+)\s+([\d.,]+)$/i;
+      const regex = /^([A-Z\d]+)\s+(.+?)\s+(-?\d+)\s+(-?[\d.,]+)(?:\s+(-?[\d.,]+)\s*%?)?\s+(-?\d+)\s+(-?[\d.,]+)$/i;
+
 
         for (let linea of lineas) {
             linea = linea.trim()
-             .replace(/[^a-zA-Z0-9 .,%\n\/]/g, '')  // Limpia caracteres no deseados
+             .replace(/[^a-zA-Z0-9 .,%\n\-\/]/g, '')  // Limpia caracteres no deseados
              .replace(/,/g, '.');  
-            let match = linea.trim().match(regexSinDto);
+            let match = linea.trim().match(regex);
             if (match) {
                 const [_, codigo, articulo, cantidad, precio, descuento, iva, importe] = match;
                 const producto = new FacturaLinea({
