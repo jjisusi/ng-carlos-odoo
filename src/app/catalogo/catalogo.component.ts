@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { Papa } from 'ngx-papaparse';
 import { Catalogo } from '../models/catalogo';
 
@@ -10,7 +10,7 @@ import { Catalogo } from '../models/catalogo';
 })
 export class CatalogoComponent {
   public catalogo: Catalogo = new Catalogo([]);
-
+  uploaded = output<Catalogo>();
   constructor(private papa: Papa) {
   }
   public upload(event: Event) {
@@ -23,10 +23,7 @@ export class CatalogoComponent {
       skipEmptyLines: true,
       complete: (results) => {
         this.catalogo = new Catalogo(results.data);
-        // const catalogoElement = document.getElementById("catalogo");
-        // if (catalogoElement) {
-        //   catalogoElement.innerHTML = this.catalogo.toTable();
-        // }
+        this.uploaded.emit(this.catalogo);
       },
       error: (err) => {
         console.error('Error al procesar el CSV:', err.message);

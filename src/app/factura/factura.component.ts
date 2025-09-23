@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { Papa } from 'ngx-papaparse';
 import { FacturaLinea } from '../models/InvoiceLine';
 import { Factura as Factura } from '../models/Invoice';
@@ -11,7 +11,7 @@ import { Factura as Factura } from '../models/Invoice';
 })
 export class FacturaComponent {
   factura: Factura = new Factura([]);
-
+  uploaded = output<Factura>();
   constructor(private papa: Papa) {
   }
   uploadInvoice(event: Event): void {
@@ -38,6 +38,7 @@ export class FacturaComponent {
       albaran.push(item);
     }
     this.factura = new Factura(albaran);
+    this.uploaded.emit(this.factura);
     // document.getElementById("desglose").innerHTML = invoice.Desglose.toTable();
     // document.getElementById("articles").innerHTML = albaran.toTable(["Referencia", "Articulo", "Cantidad", "PrecioCoste", "IVA", "Descuento", "Importe"]);
     // var someTabTriggerEl = document.querySelector('#updates-tab')
