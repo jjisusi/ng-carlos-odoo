@@ -7,15 +7,14 @@ import * as pdfjsLib from 'pdfjs-dist';
 })
 export class OcrService {
   async recognizeTextFromPdf(file: File): Promise<string[]> {
-    // Cargar el PDF
     const pdfData = await file.arrayBuffer();
     const pdf = await (pdfjsLib as any).getDocument({ data: pdfData }).promise;
-    const worker = await createWorker('spa'); // Cambia 'spa' por el idioma que necesites
+    const worker = await createWorker('spa');
 
     const results: string[] = [];
     for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
       const page = await pdf.getPage(pageNum);
-      const viewport = page.getViewport({ scale: 2 }); // Mejor calidad
+      const viewport = page.getViewport({ scale: 2 });
       const canvas = document.createElement('canvas');
       const context = canvas.getContext('2d')!;
       canvas.width = viewport.width;
