@@ -27,9 +27,7 @@
             <app-factura (uploaded)="onInvoiceUploaded($event)"></app-factura>
         </div>
         <div class="tab-pane fade" id="updates" role="tabpanel" aria-labelledby="updates-tab">
-            <!-- <input id="btnUpdates" type="button" value="Cambios" (click)="generateUpdates($event)"> -->
-            <pre id="updates">
-                        <table class="table table-stripped">
+<table class="table table-stripped">
         <thead>
             <tr>
                 <th class="text-left">Descripción</th>
@@ -62,11 +60,9 @@
             }
         </tbody>
     </table>
-                </pre>
-
         </div>
         <div class="tab-pane fade" id="consolidate" role="tabpanel" aria-labelledby="consolidate-tab">
-            <button id="btnDownload" class="btn btn-primary" onclick="Page.consolidateUpdates()">Consolidar
+            <button id="btnDownload" class="btn btn-primary" (click)="consolidateUpdates()">Consolidar
                 datos</button>
             <pre id="consolidates"></pre>
         </div>

@@ -10,6 +10,7 @@ declare global {
     fields(): (keyof T)[];
     sum(mapper: (item: T) => number): number;
     toTable(keys?: (keyof T)[]): string;
+    toCSV(keys?: (keyof T)[]): string;
   }
 }
 
@@ -24,7 +25,6 @@ Array.prototype.fields = function<T>(this: T[]): (keyof T)[] {
   }
   return [];
 };
-
 Array.prototype.toTable = function <T>(this: T[], keys?: (keyof T)[]): string {
   if (!this.length) {
     return '<table class="table table-sm table-striped"></table>';
@@ -39,4 +39,10 @@ Array.prototype.toTable = function <T>(this: T[], keys?: (keyof T)[]): string {
     return `<table class="table table-sm table-striped">${thead}${tbody}</table>`;
   }
 };
-
+Array.prototype.toCSV = function (fields:string[]) {
+    const headers = fields || this.fields();
+    const rows = this.map(obj =>
+        headers.map(header => `"${(obj[header] ?? '').toString().replace(/"/g, '""')}"`).join(',')
+    );
+    return [headers.join(','), ...rows].join('\n');
+};

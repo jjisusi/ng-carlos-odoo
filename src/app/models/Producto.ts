@@ -16,4 +16,10 @@ export class Producto {
             console.warn("El IVA de compras y ventas no conincide en " + this.Descripcion);
         }
     }
+    get TipoImpuestoVenta() {
+        return this.IVA == 10 ? 58 : 1;
+    }
+    get TipoImpuestoCompra() {
+        return this.IVA == 10 ? 170 : 171;
+    }
 }
