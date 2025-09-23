@@ -2,6 +2,8 @@ import { Component, output } from '@angular/core';
 import { Papa } from 'ngx-papaparse';
 import { FacturaLinea } from '../models/InvoiceLine';
 import { Factura as Factura } from '../models/Invoice';
+import { OcrService } from '../services/ocr.service';
+import { Producto } from '../models/Producto';
 
 @Component({
   selector: 'app-factura',
@@ -12,22 +14,33 @@ import { Factura as Factura } from '../models/Invoice';
 export class FacturaComponent {
   factura: Factura = new Factura([]);
   uploaded = output<Factura>();
-  constructor(private papa: Papa) {
+  constructor(
+    private papa: Papa,
+    private ocrService: OcrService
+  ) {
   }
-  uploadInvoice(event: Event): void {
+
+async uploadInvoicePdf(event: Event) {
     const input = event.target as HTMLInputElement;
-    // for (const file of input.files) {
-    //     const pages = await OCR.ocrPdfFromFile(file);
-    //     for (const page of pages) {
-    //         txtInvoice.value += page.text.replaceAll("|", "");
-    //     }
-    // }
-    // const facturaRawArray = txtInvoice.value.split("\n");
-    // for (const item of facturaRawArray) {
-    //     item.replace(/|/g, "").trim();
-    // }
-    // txtInvoice.value = facturaRawArray.join("\n");
+    alert("Comienza OCR");
+    const txtInvoice = document.getElementById("txtInvoice") as HTMLInputElement;
+    if (!input.files) return;
+
+    txtInvoice.innerHTML += await this.ocrService.recognizeTextFromPdf(input.files[0]);
+
+    // Limpieza de texto
+    const facturaRawArray = txtInvoice.innerHTML.split('\n').map(item => item.replace(/\|/g, '').trim());
+    txtInvoice.innerHTML = facturaRawArray.join('\n');
+
+    // Procesar productos
+    const albaran : FacturaLinea[] = [];
+    for (const item of this.extraerProductos(txtInvoice.innerHTML)) {
+      albaran.push(new FacturaLinea(item));
+    }
+    this.factura = new Factura(albaran);
+    alert("Fin OCR");
   }
+
   uploadInvoiceFromText() {
     const txtInvoice = document.getElementById("txtInvoice") as HTMLInputElement;
     let text = txtInvoice.value;
