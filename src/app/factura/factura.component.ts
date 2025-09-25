@@ -92,7 +92,7 @@ async uploadInvoicePdf(event: Event) {
         for (let linea of lineas) {
             linea = linea.trim()
              .replace(/[^a-zA-Z0-9 .,%\n\-\/]/g, '')  // Limpia caracteres no deseados
-             .replace(/,/g, '.');  
+             ;  
             let match = linea.trim().match(regex);
             if (match) {
                 const [_, codigo, articulo, cantidad, precio, descuento, iva, importe] = match;
@@ -100,7 +100,7 @@ async uploadInvoicePdf(event: Event) {
                     Referencia: codigo.trim().replace(/a/gi, "4"),
                     Articulo: articulo.trim(),
                     Cantidad: parseInt(cantidad),
-                    PrecioCoste: precio.includes(".") ? parseFloat(precio) : parseFloat(precio)/100,
+                    PrecioCoste: precio.replace(/,/g, '.').includes(".") ? parseFloat(precio.replace(/,/g, '.')) : parseFloat(precio.replace(/,/g, '.'))/100,
                     Descuento: descuento ? parseFloat(descuento) : 0,
                     IVA: parseInt(iva)
                 });

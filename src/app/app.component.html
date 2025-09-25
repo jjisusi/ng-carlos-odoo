@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
     <div id="loader" class="loader"></div>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
@@ -27,39 +27,43 @@
             <app-factura (uploaded)="onInvoiceUploaded($event)"></app-factura>
         </div>
         <div class="tab-pane fade" id="updates" role="tabpanel" aria-labelledby="updates-tab">
-<table class="table table-stripped">
-        <thead>
-            <tr>
-                <th class="text-left">Descripción</th>
-                <th class="text-left">Referencia</th>
-                <th class="text-right">Precio (coste)</th>
-                <th class="text-right">Precio (venta)</th>
-                <th class="text-right">IVA</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (producto of this.updates; track producto.id) {
-            <tr>
-                <td class="text-left">
-                    {{producto.Descripcion}}
-                </td>
-                <td class="text-left">
-                    {{producto.Referencia}}
-                </td>
-                <td class="text-right">
-                    {{producto.PrecioCoste}}
-                </td>
-                <td class="text-right">
-                    {{producto.PrecioVenta}}
-                </td>
-                <td class="text-right">
-                    {{producto.IVA}}
-                </td>
-            </tr>
+            <table class="table table-stripped">
+                <thead>
+                    <tr>
+                        <th class="text-left">Descripción</th>
+                        <th class="text-left">Referencia</th>
+                        <th class="text-right">Precio (coste)</th>
+                        <th class="text-right">Precio (venta)</th>
+                        <th class="text-right">IVA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (producto of this.updates; track producto.New.id) {
+                    <tr>
+                        <td class="text-left"
+                            [class]="producto.Old && producto.New.Descripcion!=producto.Old.Descripcion?'text-danger':''">
+                            {{producto.New.Descripcion}}
+                        </td>
+                        <td class="text-left" [class]="!producto.Old?'text-danger':''">
+                            {{producto.New.Referencia}}
+                        </td>
+                        <td class="text-right"
+                            [class]="producto.Old && producto.New.PrecioCoste>producto.Old.PrecioCoste?'text-danger':''">
+                            {{producto.New.PrecioCoste}}
+                        </td>
+                        <td class="text-right"
+                            [class]="producto.Old && producto.New.PrecioVenta>producto.Old.PrecioVenta?'text-danger':''">
+                            {{producto.New.PrecioVenta}}
+                        </td>
+                        <td class="text-right"
+                            [class]="producto.Old && producto.New.IVA>producto.Old.IVA?'text-danger':''">
+                            {{producto.New.IVA}}
+                        </td>
+                    </tr>
 
-            }
-        </tbody>
-    </table>
+                    }
+                </tbody>
+            </table>
         </div>
         <div class="tab-pane fade" id="consolidate" role="tabpanel" aria-labelledby="consolidate-tab">
             <button id="btnDownload" class="btn btn-primary" (click)="consolidateUpdates()">Consolidar

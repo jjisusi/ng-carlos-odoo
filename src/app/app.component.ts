@@ -8,6 +8,7 @@ import { FacturaComponent } from "./factura/factura.component";
 import { Catalogo } from './models/catalogo';
 import { Producto } from './models/Producto';
 import { UpdaterComponent } from "./updater/updater.component";
+import { Update } from './models/Update';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,7 @@ export class AppComponent {
 
   catalogo: Catalogo = new Catalogo([]);
   factura: Factura=new Factura([]);
-  updates: Producto[] = [];
+  updates: Update[] = [];
   inserts: Producto[] = [];
 
   constructor(private papa: Papa) {
@@ -48,7 +49,7 @@ export class AppComponent {
         this.updates = [];
         for (const art of this.factura.lineas) {
 
-            const found = this.catalogo.productos.find(x => x.Referencia == art.Referencia);
+            const found : Producto | undefined = this.catalogo.productos.find(x => x.Referencia == art.Referencia);
 
             //to-do : update catalog
             if (!found) {
@@ -59,7 +60,7 @@ export class AppComponent {
                     nuevo.PrecioVenta = Math.round(art.Precio * 1.20 * 100)/100,
                     nuevo.IVA = art.IVA
 
-                this.updates.push(nuevo);
+                this.updates.push(new Update(nuevo,found));
             }
         }
         for (const art of this.factura.lineas) {
@@ -100,13 +101,13 @@ export class AppComponent {
                     //updated["TipoImpuestoCompra"] = art.TipoImpuestoCompra;
                 }
                 if (hasChanged)
-                    this.updates.push(updated);
+                    this.updates.push(new Update(updated,found));
             }
         }
 
   }
   consolidateUpdates(){
-        const csv = this.updates.toCSV(["id", "Referencia", "Descripcion", "PrecioCoste", "PrecioVenta", "TipoImpuestoVenta","TipoImpuestoCompra"]);
+        const csv = this.updates.map(x=>x.New).toCSV(["id", "Referencia", "Descripcion", "PrecioCoste", "PrecioVenta", "TipoImpuestoVenta","TipoImpuestoCompra"]);
         CSV.download(csv, "toImport.csv");
   }
 }
