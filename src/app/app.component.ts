@@ -9,10 +9,11 @@ import { Catalogo } from './models/catalogo';
 import { Producto } from './models/Producto';
 import { UpdaterComponent } from "./updater/updater.component";
 import { Update } from './models/Update';
+import { NovedadesComponent } from "./components/novedades/novedades.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CatalogoComponent, FacturaComponent, UpdaterComponent],
+  imports: [RouterOutlet, CatalogoComponent, FacturaComponent, UpdaterComponent, NovedadesComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -23,7 +24,7 @@ export class AppComponent {
   factura: Factura=new Factura([]);
   updates: Update[] = [];
   inserts: Producto[] = [];
-
+  novedades:Producto[] = [];
   constructor(private papa: Papa) {
     const csvData = '"Hello","World!"';
 
@@ -109,6 +110,16 @@ export class AppComponent {
   consolidateUpdates(){
         const csv = this.updates.map(x=>x.New).toCSV(["id", "Referencia", "Descripcion", "PrecioCoste", "PrecioVenta", "TipoImpuestoVenta","TipoImpuestoCompra"]);
         CSV.download(csv, "toImport.csv");
+  }
+  procesarNovedades(items:Producto[]){
+    this.novedades=[];
+      for(const novedad of items){
+          if(this.catalogo.Productos.find(x=>x.Referencia==novedad.Referencia)){
+
+          }else{
+             this.novedades.push(novedad);
+          }
+      }
   }
 }
 class CSV  {

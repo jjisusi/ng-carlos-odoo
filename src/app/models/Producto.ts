@@ -5,6 +5,7 @@ export class Producto {
     PrecioCoste: number;
     PrecioVenta: number;
     IVA: number;
+    Imagen: string = "";
     constructor(json: any) {
         this.id = json.id;
         this.Referencia = json.default_code;

@@ -17,6 +17,10 @@
             <button class="nav-link" id="consolidate-tab" data-toggle="tab" data-target="#consolidate" type="button"
                 role="tab" aria-controls="consolidate" aria-selected="false">Consolidar</button>
         </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="novedades-tab" data-toggle="tab" data-target="#novedades" type="button"
+                role="tab" aria-controls="novedades" aria-selected="false">Novedades</button>
+        </li>
 
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -40,12 +44,12 @@
                 <tbody>
                     @for (producto of this.updates; track producto.New.id) {
                     <tr>
+                        <td class="text-left" [class]="!producto.Old?'text-danger':''">
+                            {{producto.New.Referencia}}
+                        </td>
                         <td class="text-left"
                             [class]="producto.Old && producto.New.Descripcion!=producto.Old.Descripcion?'text-danger':''">
                             {{producto.New.Descripcion}}
-                        </td>
-                        <td class="text-left" [class]="!producto.Old?'text-danger':''">
-                            {{producto.New.Referencia}}
                         </td>
                         <td class="text-right"
                             [class]="producto.Old && producto.New.PrecioCoste>producto.Old.PrecioCoste?'text-danger':''">
@@ -69,6 +73,26 @@
             <button id="btnDownload" class="btn btn-primary" (click)="consolidateUpdates()">Consolidar
                 datos</button>
             <pre id="consolidates"></pre>
+        </div>
+
+        <div class="tab-pane fade" id="novedades" role="tabpanel" aria-labelledby="novedades-tab">
+            <app-novedades (uploaded)="procesarNovedades($event)"></app-novedades>
+            @if(this.novedades.length){
+                @for (producto of this.novedades; track producto.id) {
+                <div class="col-sm-4">
+                    <div class="card">
+                        <img src="data:image/jpeg;base64,{{producto.Imagen}}" height="150">
+                        <div class="card-body">
+                            <h5 class="card-title">{{producto.Referencia}}</h5>
+                        </div>
+                    </div>
+                </div>
+                }
+            }
+            @else {
+                No hay novedades
+            }
+
         </div>
     </div>
 </div>
