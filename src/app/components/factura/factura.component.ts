@@ -1,9 +1,8 @@
 import { Component, output } from '@angular/core';
 import { Papa } from 'ngx-papaparse';
-import { FacturaLinea } from '../models/InvoiceLine';
-import { Factura as Factura } from '../models/Invoice';
-import { OcrService } from '../services/ocr.service';
-import { Producto } from '../models/Producto';
+import { Factura } from '../../models/Invoice';
+import { FacturaLinea } from '../../models/InvoiceLine';
+import { OcrService } from '../../services/ocr.service';
 
 @Component({
   selector: 'app-factura',
@@ -39,6 +38,9 @@ async uploadInvoicePdf(event: Event) {
     }
     this.factura = new Factura(albaran);
     alert("Fin OCR");
+  }
+  updateProduct(){
+    this.uploaded.emit(this.factura);
   }
 
   uploadInvoiceFromText() {

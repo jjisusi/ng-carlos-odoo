@@ -2,14 +2,13 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Papa } from 'ngx-papaparse';
 import { Factura } from './models/Invoice';
-import { FacturaLinea } from './models/InvoiceLine';
-import { CatalogoComponent } from './catalogo/catalogo.component';
-import { FacturaComponent } from "./factura/factura.component";
 import { Catalogo } from './models/catalogo';
 import { Producto } from './models/Producto';
 import { UpdaterComponent } from "./updater/updater.component";
 import { Update } from './models/Update';
 import { NovedadesComponent } from "./components/novedades/novedades.component";
+import { FacturaComponent } from './components/factura/factura.component';
+import { CatalogoComponent } from './components/catalogo/catalogo.component';
 
 @Component({
   selector: 'app-root',
