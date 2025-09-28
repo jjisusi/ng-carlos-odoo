@@ -77,29 +77,17 @@ export class AppComponent {
                 updated.PrecioVenta = found.PrecioVenta;
                 updated.IVA=found.IVA;
                 if (found.Descripcion.normalize("NFKD").replace(/[^\x00-\x7F]/g, "") != art.Articulo.normalize("NFKD").replace(/[^\x00-\x7F]/g, "")) {
-                    // updated.last_name = "<b>" + updated.Nombre + "</b>"
                     updated.Descripcion = art.Articulo;
                     hasChanged = true;
-                    //console.log("Cambio en nombre " + updated.Nombre + " --- " + updated.last_name);
                 }
-                // updated.UltimoPrecio = updated.PrecioCoste;
-                // updated.UltimoPrecioVenta = updated.PrecioVenta;
                 if (found.PrecioCoste < art.Precio) {
-                    // updated.UltimoPrecio = "<b>" + updated.PrecioCoste + "</b>";
-                    // updated.UltimoPrecioVenta = "<b>" + updated.UltimoPrecioVenta + "</b>";
                     updated.PrecioCoste = art.Precio;
                     updated.PrecioVenta=Math.round(art.Precio * 1.20 * 100)/100;
                     hasChanged = true;
-                    //console.log("Cambio en PrecioCoste " + updated.Descripcion + " de " + updated.last_price + " a " + art.PrecioCoste);
                 }
                 if (found.IVA != art.IVA) {
-                    // updated.UltimoIVA = updated["IVA"];
                     updated.IVA = art.IVA;
-                    // updated["TipoImpuestoCompra"] = art.TipoImpuestoCompra;
                     hasChanged = true;
-                    //console.log("Cambio en impuesto " + updated.Nombre + " de " + updated.UltimoIVA + " a " + art.IVA);
-                } else {
-                    //updated["TipoImpuestoCompra"] = art.TipoImpuestoCompra;
                 }
                 if (hasChanged)
                     this.updates.push(new Update(updated,found));
