@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { Papa } from 'ngx-papaparse';
 import { Factura } from './models/Invoice';
 import { Catalogo } from './models/catalogo';
 import { Producto } from './models/Producto';
-import { UpdaterComponent } from './components/updater/updater.component';
 import { Update } from './models/Update';
 import { NovedadesComponent } from "./components/novedades/novedades.component";
 import { FacturaComponent } from './components/factura/factura.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
 
+
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CatalogoComponent, FacturaComponent, UpdaterComponent, NovedadesComponent],
+  imports: [CatalogoComponent, FacturaComponent,  NovedadesComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
