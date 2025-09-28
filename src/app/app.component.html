@@ -34,6 +34,7 @@
             <table class="table table-stripped">
                 <thead>
                     <tr>
+                        <th><input type="checkbox" class="form-control" [checked]="isAllChecked()" (click)="checkAll()" ></th>
                         <th class="text-left">Referencia</th>
                         <th class="text-left">Descripción</th>
                         <th class="text-right">Precio (coste)</th>
@@ -42,8 +43,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (producto of this.updates; track producto.New.id) {
+                    @for (producto of updates || []; track producto.New.id) {
                     <tr>
+                        <td>
+                            <input type="checkbox" class="form-control" [checked]="producto.Active" (click)="onSelectUpdate(producto)" >
+                        </td>
                         <td class="text-left" [class]="!producto.Old?'text-danger':''">
                             {{producto.New.Referencia}}
                         </td>
@@ -72,7 +76,7 @@
         <div class="tab-pane fade" id="consolidate" role="tabpanel" aria-labelledby="consolidate-tab">
             <button id="btnDownload" class="btn btn-primary" (click)="consolidateUpdates()">Consolidar
                 datos</button>
-            <pre id="consolidates"></pre>
+
         </div>
 
         <div class="tab-pane fade" id="novedades" role="tabpanel" aria-labelledby="novedades-tab">

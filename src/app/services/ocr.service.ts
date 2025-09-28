@@ -6,7 +6,7 @@ import * as pdfjsLib from 'pdfjs-dist';
   providedIn: 'root'
 })
 export class OcrService {
-  async recognizeTextFromPdf(file: File): Promise<string[]> {
+  async analyzeInvoice(file: File): Promise<string[]> {
     const pdfData = await file.arrayBuffer();
     const pdf = await (pdfjsLib as any).getDocument({ data: pdfData }).promise;
     const worker = await createWorker('spa');

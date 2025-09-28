@@ -1,5 +1,5 @@
 import { Component, Input, input } from '@angular/core';
-import { Producto } from '../models/Producto';
+import { Update } from '../../models/Update';
 
 @Component({
   selector: 'app-updater',
@@ -8,5 +8,5 @@ import { Producto } from '../models/Producto';
   styleUrl: './updater.component.scss'
 })
 export class UpdaterComponent {
-  value=input<Producto[]>();
+  updates=input<Update[]>();
 }

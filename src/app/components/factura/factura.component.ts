@@ -25,7 +25,7 @@ async uploadInvoicePdf(event: Event) {
     const txtInvoice = document.getElementById("txtInvoice") as HTMLInputElement;
     if (!input.files) return;
 
-    txtInvoice.innerHTML += await this.ocrService.recognizeTextFromPdf(input.files[0]);
+    txtInvoice.innerHTML += await this.ocrService.analyzeInvoice(input.files[0]);
 
     // Limpieza de texto
     const facturaRawArray = txtInvoice.innerHTML.split('\n').map(item => item.replace(/\|/g, '').trim());

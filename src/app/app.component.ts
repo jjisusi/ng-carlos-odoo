@@ -4,7 +4,7 @@ import { Papa } from 'ngx-papaparse';
 import { Factura } from './models/Invoice';
 import { Catalogo } from './models/catalogo';
 import { Producto } from './models/Producto';
-import { UpdaterComponent } from "./updater/updater.component";
+import { UpdaterComponent } from './components/updater/updater.component';
 import { Update } from './models/Update';
 import { NovedadesComponent } from "./components/novedades/novedades.component";
 import { FacturaComponent } from './components/factura/factura.component';
@@ -70,6 +70,7 @@ export class AppComponent {
             if (found) {
                 let hasChanged = false;
                 const updated = new Producto({});
+                updated.id=found.id;
                 updated.Descripcion=found.Descripcion;
                 updated.Referencia = found.Referencia;
                 updated.PrecioCoste=found.PrecioCoste;
@@ -106,8 +107,18 @@ export class AppComponent {
         }
 
   }
+  isAllChecked(){
+    return !this.updates.some(x=>!x.Active);
+  }
+  checkAll(){
+    const checked:boolean = !this.updates.some(x=>!x.Active);
+    this.updates.forEach(x=>x.Active=!checked);
+  }
+  onSelectUpdate(producto:Update){
+    producto.Active=!producto.Active; 
+  }
   consolidateUpdates(){
-        const csv = this.updates.map(x=>x.New).toCSV(["id", "Referencia", "Descripcion", "PrecioCoste", "PrecioVenta", "TipoImpuestoVenta","TipoImpuestoCompra"]);
+        const csv = this.updates.filter(x=>x.Active).map(x=>x.New).toCSV(["id", "Referencia", "Descripcion", "PrecioCoste", "PrecioVenta", "TipoImpuestoVenta","TipoImpuestoCompra"]);
         CSV.download(csv, "toImport.csv");
   }
   procesarNovedades(items:Producto[]){
