@@ -17,7 +17,7 @@ import { UpdaterComponent } from './components/updater/updater.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'prueba';
+  title = 'ng-carlos-odoo';
 
   catalogo: Catalogo = new Catalogo([]);
   factura: Factura=new Factura([]);

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "prueba": {
+    "ng-carlos-odoo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/prueba",
+            "outputPath": "dist/ng-carlos-odoo",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -64,7 +64,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "prueba:build:production"
+              "buildTarget": "ng-carlos-odoo:build:production"
             },
             "development": {
               "buildTarget": "prueba:build:development"
