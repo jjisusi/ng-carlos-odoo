@@ -23,4 +23,7 @@ export class Producto {
     get TipoImpuestoCompra() {
         return this.IVA == 10 ? 170 : 171;
     }
+    get Margen(){
+        return (this.PrecioVenta/this.PrecioCoste-1)*100;
+    }
 }

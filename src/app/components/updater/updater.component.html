@@ -1,35 +1,62 @@
-
-            <table class="table table-stripped">
+<table class="table table-stripped">
                 <thead>
                     <tr>
+                        <th><input type="checkbox" class="form-control" [checked]="isAllChecked()" (click)="checkAll()" ></th>
                         <th class="text-left">Referencia</th>
                         <th class="text-left">Descripción</th>
                         <th class="text-right">Precio (coste)</th>
+                        <th class="text-right">Coste (ant.)</th>
                         <th class="text-right">Precio (venta)</th>
+                        <th class="text-right">venta (ant.)</th>
                         <th class="text-right">IVA</th>
+                        <th class="text-right">IVA (ant.)</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @for (producto of this.updates || []; track producto.New.id) {
+                    @for (producto of updates || []; track producto.New.id) {
                     <tr>
+                        <td>
+                            <input type="checkbox" class="form-control" [checked]="producto.Active" (click)="onSelectUpdate(producto)" >
+                        </td>
                         <td class="text-left" [class]="!producto.Old?'text-danger':''">
                             {{producto.New.Referencia}}
                         </td>
                         <td class="text-left"
                             [class]="producto.Old && producto.New.Descripcion!=producto.Old.Descripcion?'text-danger':''">
                             {{producto.New.Descripcion}}
+                        </td>                                                                        
+                        <td class="text-left" >
+                            <span *ngIf="producto.Old && producto.New.Descripcion!=producto.Old.Descripcion">
+                                {{producto.Old.Descripcion}}
+                            </span>
                         </td>
                         <td class="text-right"
                             [class]="producto.Old && producto.New.PrecioCoste>producto.Old.PrecioCoste?'text-danger':''">
+                            <!-- <input type="number" class="form-control" [(value)]="producto.New.PrecioCoste" (change)="onChangeProduct($event,producto)"> -->
                             {{producto.New.PrecioCoste}}
+                        </td>                        
+                        <td class="text-right" >
+                            <span *ngIf="producto.Old && producto.New.PrecioCoste>producto.Old.PrecioCoste">
+                                {{producto.Old.PrecioCoste}}
+                            </span>
                         </td>
                         <td class="text-right"
                             [class]="producto.Old && producto.New.PrecioVenta>producto.Old.PrecioVenta?'text-danger':''">
                             {{producto.New.PrecioVenta}}
+                        </td>                                                
+                        <td class="text-right" >
+                            <span *ngIf="producto.Old && producto.New.PrecioVenta>producto.Old.PrecioVenta">
+                                {{producto.Old.PrecioVenta}}
+                            </span>
                         </td>
                         <td class="text-right"
                             [class]="producto.Old && producto.New.IVA>producto.Old.IVA?'text-danger':''">
                             {{producto.New.IVA}}
+                        </td>                                                                        
+                        <td class="text-right" >
+                            <span *ngIf="producto.Old && producto.New.IVA>producto.Old.IVA">
+                                {{producto.Old.IVA}}
+                            </span>
                         </td>
                     </tr>
 

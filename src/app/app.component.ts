@@ -7,11 +7,12 @@ import { Update } from './models/Update';
 import { NovedadesComponent } from "./components/novedades/novedades.component";
 import { FacturaComponent } from './components/factura/factura.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
+import { UpdaterComponent } from './components/updater/updater.component';
 
 
 @Component({
   selector: 'app-root',
-  imports: [CatalogoComponent, FacturaComponent,  NovedadesComponent],
+  imports: [CatalogoComponent, FacturaComponent,  NovedadesComponent,UpdaterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -34,9 +35,9 @@ export class AppComponent {
   }
   onCatalogUploaded(catalogo:Catalogo): void {
     this.catalogo=catalogo;
-    if(this.factura.lineas.length){
-      this.generateUpdates();
-    }
+    // if(this.factura.lineas.length){
+    //   this.generateUpdates();
+    // }
   }
   onInvoiceUploaded(factura:Factura): void {
     this.factura=factura;
@@ -94,16 +95,7 @@ export class AppComponent {
         }
 
   }
-  isAllChecked(){
-    return !this.updates.some(x=>!x.Active);
-  }
-  checkAll(){
-    const checked:boolean = !this.updates.some(x=>!x.Active);
-    this.updates.forEach(x=>x.Active=!checked);
-  }
-  onSelectUpdate(producto:Update){
-    producto.Active=!producto.Active; 
-  }
+
   consolidateUpdates(){
         const csv = this.updates.filter(x=>x.Active).map(x=>x.New).toCSV(["id", "Referencia", "Descripcion", "PrecioCoste", "PrecioVenta", "TipoImpuestoVenta","TipoImpuestoCompra"]);
         CSV.download(csv, "toImport.csv");

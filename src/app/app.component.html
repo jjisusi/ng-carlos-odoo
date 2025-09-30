@@ -31,47 +31,7 @@
             <app-factura (uploaded)="onInvoiceUploaded($event)"></app-factura>
         </div>
         <div class="tab-pane fade" id="updates" role="tabpanel" aria-labelledby="updates-tab">
-            <table class="table table-stripped">
-                <thead>
-                    <tr>
-                        <th><input type="checkbox" class="form-control" [checked]="isAllChecked()" (click)="checkAll()" ></th>
-                        <th class="text-left">Referencia</th>
-                        <th class="text-left">Descripción</th>
-                        <th class="text-right">Precio (coste)</th>
-                        <th class="text-right">Precio (venta)</th>
-                        <th class="text-right">IVA</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (producto of updates || []; track producto.New.id) {
-                    <tr>
-                        <td>
-                            <input type="checkbox" class="form-control" [checked]="producto.Active" (click)="onSelectUpdate(producto)" >
-                        </td>
-                        <td class="text-left" [class]="!producto.Old?'text-danger':''">
-                            {{producto.New.Referencia}}
-                        </td>
-                        <td class="text-left"
-                            [class]="producto.Old && producto.New.Descripcion!=producto.Old.Descripcion?'text-danger':''">
-                            {{producto.New.Descripcion}}
-                        </td>
-                        <td class="text-right"
-                            [class]="producto.Old && producto.New.PrecioCoste>producto.Old.PrecioCoste?'text-danger':''">
-                            {{producto.New.PrecioCoste}}
-                        </td>
-                        <td class="text-right"
-                            [class]="producto.Old && producto.New.PrecioVenta>producto.Old.PrecioVenta?'text-danger':''">
-                            {{producto.New.PrecioVenta}}
-                        </td>
-                        <td class="text-right"
-                            [class]="producto.Old && producto.New.IVA>producto.Old.IVA?'text-danger':''">
-                            {{producto.New.IVA}}
-                        </td>
-                    </tr>
-
-                    }
-                </tbody>
-            </table>
+            <app-updater [updates]="updates" ></app-updater>
         </div>
         <div class="tab-pane fade" id="consolidate" role="tabpanel" aria-labelledby="consolidate-tab">
             <button id="btnDownload" class="btn btn-primary" (click)="consolidateUpdates()">Consolidar

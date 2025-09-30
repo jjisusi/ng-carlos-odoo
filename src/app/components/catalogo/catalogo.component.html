@@ -20,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            @for (producto of this.catalogo.Productos; track producto.id) {
+            @for (producto of this.catalogo.Productos.slice(0,50); track producto.id) {
             <tr>
                 <td class="text-left">
                     {{producto.Descripcion}}
@@ -36,6 +36,9 @@
                 </td>
                 <td class="text-right">
                     {{producto.IVA}}
+                </td>
+                <td class="text-right">
+                    {{producto.Margen}}
                 </td>
             </tr>
 
