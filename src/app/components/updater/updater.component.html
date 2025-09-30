@@ -4,12 +4,15 @@
                         <th><input type="checkbox" class="form-control" [checked]="isAllChecked()" (click)="checkAll()" ></th>
                         <th class="text-left">Referencia</th>
                         <th class="text-left">Descripción</th>
+                        <th class="text-left">Descripción (ant) </th>
                         <th class="text-right">Precio (coste)</th>
                         <th class="text-right">Coste (ant.)</th>
                         <th class="text-right">Precio (venta)</th>
                         <th class="text-right">venta (ant.)</th>
                         <th class="text-right">IVA</th>
                         <th class="text-right">IVA (ant.)</th>
+                        <th class="text-right">Margen</th>
+                        <th class="text-right">Margen (ant.)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,8 +61,21 @@
                                 {{producto.Old.IVA}}
                             </span>
                         </td>
+                        <td class="text-right"
+                            [class]="producto.Old && producto.New.Margen>producto.Old.Margen?'text-danger':''">
+                            {{producto.New.Margen.toFixed(2)}}
+                        </td>                                                                        
+                        <td class="text-right" >
+                            <span *ngIf="producto.Old && producto.New.Margen>producto.Old.Margen">
+                                {{producto.Old.Margen.toFixed(2)}}
+                            </span>
+                        </td>
                     </tr>
 
                     }
                 </tbody>
             </table>
+            <input type="button" value="a texto">
+            <pre>
+                {{arrayToTabulatedText()}}
+            </pre>
