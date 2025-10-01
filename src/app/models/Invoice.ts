@@ -9,9 +9,9 @@ export class Factura {
     this.lineas = lines;
   }
   public get Total() {
-    return this.lineas.sum(x => x.Importe * x.IVA / 100);
+    return this.lineas.sum(x => x.Importe * (1 + x.IVA / 100));
   }
-  public get Desglose() {
+  public get Desglose():Desglose[] {
         const iva10 = this.lineas.filter(x => x.IVA == 10);
         const iva21 = this.lineas.filter(x => x.IVA == 21);
         return [
@@ -19,20 +19,21 @@ export class Factura {
                 IVA: "10",
                 Importe: iva10.sum(x => x.Importe),
                 Cuota: iva10.sum(x => x.Cuota),
-                Total:""
+                Total:null
             },
             {
                 IVA: "21",
                 Importe: iva21.sum(x => x.Importe),
                 Cuota: iva21.sum(x => x.Cuota),
-                Total:""
-            },            
-            {
-                IVA: "",
-                Importe: this.lineas.sum(x=>x.Importe),
-                Cuota: this.lineas.sum(x => x.Cuota),
-                Total: this.lineas.sum(x=>x.Total)
-            },
+                Total:null
+            }
         ];
   }
+}
+
+interface Desglose{
+  IVA:string;
+  Importe:number;
+  Cuota:number;
+  Total:number|null;
 }

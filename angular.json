@@ -67,7 +67,7 @@
               "buildTarget": "ng-carlos-odoo:build:production"
             },
             "development": {
-              "buildTarget": "prueba:build:development"
+              "buildTarget": "ng-carlos-odoo:build:development"
             }
           },
           "defaultConfiguration": "development"

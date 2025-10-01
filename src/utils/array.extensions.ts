@@ -3,15 +3,12 @@
 declare global {
   interface Array<T> {
     fields(): (keyof T)[];
+    groupBy<K>(keySelector: (item: T) => K): Array<{ key: K; items: T[] }>
     sum(mapper: (item: T) => number): number;
     toTable(keys?: (keyof T)[]): string;
     toCSV(keys?: (keyof T)[]): string;
   }
 }
-
-Array.prototype.sum = function <T>(this: T[], mapper: (item: T) => number): number {
-  return this.map(mapper).reduce((acc, val) => acc + val, 0);
-};
 
 Array.prototype.fields = function<T>(this: T[]): (keyof T)[] {
   if (this.length > 0) {
@@ -19,6 +16,33 @@ Array.prototype.fields = function<T>(this: T[]): (keyof T)[] {
     return Object.keys(item) as (keyof T)[];
   }
   return [];
+};
+
+
+Array.prototype.groupBy = function <T, K>(this: T[], keySelector: (item: T) => K): Array<{ key: K; items: T[] }> {
+  const groupedList: Array<{ key: K; items: T[] }> = [];
+
+  for (let i = 0; i < this.length; i++) {
+    const key = keySelector(this[i]);
+    let group = groupedList.find(x => JSON.stringify(x.key) === JSON.stringify(key));
+
+    if (!group) {
+      group = {
+        key,
+        items: []
+      };
+      groupedList.push(group);
+    }
+
+    group.items.push(this[i]);
+  }
+
+  return groupedList;
+};
+
+
+Array.prototype.sum = function <T>(this: T[], selector: (item: T) => number): number {
+  return this.map(selector).reduce((acc, val) => acc + val, 0);
 };
 
 Array.prototype.toTable = function <T>(this: T[], keys?: (keyof T)[]): string {

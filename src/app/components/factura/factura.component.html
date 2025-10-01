@@ -28,17 +28,32 @@
                     {{item.IVA}}
                 </td>
                 <td class="text-right">
-                    {{item.Importe}}
+                    {{item.Importe.toFixed(2)}}
                 </td>
                 <td class="text-right">
-                    {{item.Cuota}}
+                    {{item.Cuota.toFixed(2)}}
                 </td>
                 <td class="text-right">
-                    {{item.Total}}
+                    {{item.Total?.toFixed(2)}}
                 </td>
             </tr>
             }
         </tbody>
+        <tfoot>
+            <tr>
+                <th class="text-right">
+                </th>
+                <th class="text-right">
+
+                </th>
+                <th class="text-right">
+
+                </th>
+                <th class="text-right">
+                    {{this.factura.Total?.toFixed(2)}}
+                </th>
+            </tr>
+        </tfoot>
     </table>
 </div>
 <div id="articles">
