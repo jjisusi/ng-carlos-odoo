@@ -36,8 +36,13 @@ export class UpdaterComponent {
       Ref: x.New.Referencia,
       Descripcion: x.New.Descripcion,
       Coste: x.New.PrecioCoste,
-      Venta: x.New.PrecioVenta,
+      Venta: x.New.PrecioVenta.toFixed(2),
       IVA: x.New.IVA,
+      Margen:x.New.Margen,
+      CosteAnt:x.Old?.PrecioCoste,
+      VentaAnt:x.Old?.PrecioVenta.toFixed(2),
+      IVAAnt:x.Old?.IVA,
+      MargenAnt:x.Old?.Margen.toFixed(2)
     }));
 
     return this.arrayToAlignedText(data);

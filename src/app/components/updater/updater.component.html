@@ -62,11 +62,11 @@
                             </span>
                         </td>
                         <td class="text-right"
-                            [class]="producto.Old && producto.New.Margen>producto.Old.Margen?'text-danger':''">
+                            [class]="producto.Old && producto.New.Margen!=producto.Old.Margen?'text-danger':''">
                             {{producto.New.Margen.toFixed(2)}}
                         </td>                                                                        
                         <td class="text-right" >
-                            <span *ngIf="producto.Old && producto.New.Margen>producto.Old.Margen">
+                            <span *ngIf="producto.Old && producto.New.Margen!=producto.Old.Margen">
                                 {{producto.Old.Margen.toFixed(2)}}
                             </span>
                         </td>
