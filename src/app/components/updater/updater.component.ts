@@ -36,16 +36,25 @@ export class UpdaterComponent {
       Ref: x.New.Referencia,
       Descripcion: x.New.Descripcion,
       Coste: x.New.PrecioCoste,
-      Venta: x.New.PrecioVenta.toFixed(2),
+      Venta: x.New.PrecioVenta,
       IVA: x.New.IVA,
       Margen:x.New.Margen,
       CosteAnt:x.Old?.PrecioCoste,
-      VentaAnt:x.Old?.PrecioVenta.toFixed(2),
+      VentaAnt:x.Old?.PrecioVenta,
       IVAAnt:x.Old?.IVA,
-      MargenAnt:x.Old?.Margen.toFixed(2)
+      MargenAnt:x.Old?.Margen
     }));
-
-    return this.arrayToAlignedText(data);
+    return data.map(x=> x.Ref.padEnd(7) 
+              + x.Descripcion.padEnd(50) 
+              + x.Coste.toFixed().padEnd(6) 
+              + x.Venta.toFixed(2).padEnd(6) 
+              +  x.Margen.toFixed(2).padEnd(6)
+              // +  (x.CosteAnt && x.CosteAnt.toFixed(2).padEnd(6))
+              // +  (x.VentaAnt && x.VentaAnt!.toFixed(2).padEnd(6))
+              // +  (x.IVAAnt && x.IVAAnt!.toFixed(2).padEnd(6))
+              // +  (x.MargenAnt && x.MargenAnt!.toFixed(2).padEnd(6))
+            
+            ).join("\n")
   }
 
   arrayToAlignedText(data: Record<string, any>[]): string {
