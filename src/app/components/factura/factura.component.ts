@@ -93,7 +93,7 @@ async uploadInvoicePdf(event: Event) {
 
         for (let linea of lineas) {
             linea = linea.trim()
-             .replace(/[^a-zA-Z0-9 .,%\n\-\/]/g, '')  // Limpia caracteres no deseados
+             .replace(/[^a-zA-Z0-9 .,&%\n\-\/]/g, '')  // Limpia caracteres no deseados
              ;  
             let match = linea.trim().match(regex);
             if (match) {
