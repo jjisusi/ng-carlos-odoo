@@ -100,7 +100,7 @@ async uploadInvoicePdf(event: Event) {
                 const [_, codigo, articulo, cantidad, precio, descuento, iva, importe] = match;
                 const producto = new FacturaLinea({
                     Referencia: codigo.trim().replace(/a/gi, "4"),
-                    Articulo: articulo.trim(),
+                    Articulo: articulo.trim().replace("NNN",""),
                     Cantidad: parseInt(cantidad),
                     PrecioCoste: precio.replace(/,/g, '.').includes(".") ? parseFloat(precio.replace(/,/g, '.')) : parseFloat(precio.replace(/,/g, '.'))/100,
                     Descuento: descuento ? parseFloat(descuento) : 0,
