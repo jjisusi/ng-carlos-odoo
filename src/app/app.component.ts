@@ -55,7 +55,7 @@ export class AppComponent {
             if (!found) {
                 const nuevo = new Producto({});
                     nuevo.Referencia = art.Referencia,
-                    nuevo.Descripcion= art.Articulo,
+                    nuevo.Descripcion= art.Articulo.replace("NNN ",""),
                     nuevo.PrecioCoste = art.Precio,
                     nuevo.PrecioVenta = Math.round(art.Precio * 1.20 * 100)/100,
                     nuevo.IVA = art.IVA
@@ -71,13 +71,13 @@ export class AppComponent {
                 let hasChanged = false;
                 const updated = new Producto({});
                 updated.id=found.id;
-                updated.Descripcion=found.Descripcion;
+                updated.Descripcion=found.Descripcion.replace("NNN ","");
                 updated.Referencia = found.Referencia;
                 updated.PrecioCoste=found.PrecioCoste;
                 updated.PrecioVenta = found.PrecioVenta;
                 updated.IVA=found.IVA;
                 if (found.Descripcion.normalize("NFKD").replace(/[^\x00-\x7F]/g, "") != art.Articulo.normalize("NFKD").replace(/[^\x00-\x7F]/g, "")) {
-                    updated.Descripcion = art.Articulo;
+                    updated.Descripcion = art.Articulo.replace("NNN ","");
                     hasChanged = true;
                 }
                 if (found.PrecioCoste < art.Precio) {

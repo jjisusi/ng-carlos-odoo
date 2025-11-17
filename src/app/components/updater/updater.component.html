@@ -1,81 +1,93 @@
-<table class="table table-stripped">
-                <thead>
-                    <tr>
-                        <th><input type="checkbox" class="form-control" [checked]="isAllChecked()" (click)="checkAll()" ></th>
-                        <th class="text-left">Referencia</th>
-                        <th class="text-left">Descripción</th>
-                        <th class="text-left">Descripción (ant) </th>
-                        <th class="text-right">Precio (coste)</th>
-                        <th class="text-right">Coste (ant.)</th>
-                        <th class="text-right">Precio (venta)</th>
-                        <th class="text-right">venta (ant.)</th>
-                        <th class="text-right">IVA</th>
-                        <th class="text-right">IVA (ant.)</th>
-                        <th class="text-right">Margen</th>
-                        <th class="text-right">Margen (ant.)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (producto of updates || []; track producto.New.id) {
-                    <tr>
-                        <td>
-                            <input type="checkbox" class="form-control" [checked]="producto.Active" (click)="onSelectUpdate(producto)" >
-                        </td>
-                        <td class="text-left" [class]="!producto.Old?'text-danger':''">
-                            {{producto.New.Referencia}}
-                        </td>
-                        <td class="text-left"
-                            [class]="producto.Old && producto.New.Descripcion!=producto.Old.Descripcion?'text-danger':''">
-                            {{producto.New.Descripcion}}
-                        </td>                                                                        
-                        <td class="text-left" >
-                            <span *ngIf="producto.Old && producto.New.Descripcion!=producto.Old.Descripcion">
-                                {{producto.Old.Descripcion}}
-                            </span>
-                        </td>
-                        <td class="text-right"
-                            [class]="producto.Old && producto.New.PrecioCoste>producto.Old.PrecioCoste?'text-danger':''">
-                            <!-- <input type="number" class="form-control" [(value)]="producto.New.PrecioCoste" (change)="onChangeProduct($event,producto)"> -->
-                            {{producto.New.PrecioCoste}}
-                        </td>                        
-                        <td class="text-right" >
-                            <span *ngIf="producto.Old && producto.New.PrecioCoste>producto.Old.PrecioCoste">
-                                {{producto.Old.PrecioCoste}}
-                            </span>
-                        </td>
-                        <td class="text-right"
-                            [class]="producto.Old && producto.New.PrecioVenta>producto.Old.PrecioVenta?'text-danger':''">
-                            {{producto.New.PrecioVenta}}
-                        </td>                                                
-                        <td class="text-right" >
-                            <span *ngIf="producto.Old && producto.New.PrecioVenta>producto.Old.PrecioVenta">
-                                {{producto.Old.PrecioVenta}}
-                            </span>
-                        </td>
-                        <td class="text-right"
-                            [class]="producto.Old && producto.New.IVA>producto.Old.IVA?'text-danger':''">
-                            {{producto.New.IVA}}
-                        </td>                                                                        
-                        <td class="text-right" >
-                            <span *ngIf="producto.Old && producto.New.IVA>producto.Old.IVA">
-                                {{producto.Old.IVA}}
-                            </span>
-                        </td>
-                        <td class="text-right"
-                            [class]="producto.Old && producto.New.Margen!=producto.Old.Margen?'text-danger':''">
-                            {{producto.New.Margen.toFixed(2)}}
-                        </td>                                                                        
-                        <td class="text-right" >
-                            <span *ngIf="producto.Old && producto.New.Margen!=producto.Old.Margen">
-                                {{producto.Old.Margen.toFixed(2)}}
-                            </span>
-                        </td>
-                    </tr>
+<div class="row">
 
-                    }
-                </tbody>
-            </table>
-            <input type="button" value="a texto">
-            <pre>
-                {{arrayToTabulatedText()}}
-            </pre>
+
+    @for (producto of updates || []; track producto.New.id) {
+    <div class="col-6">
+        <table class="table table-stripped tabl-bordered">
+            <thead>
+                <th>
+                </th>
+                <th>
+                    Anterior
+                </th>
+                <th>
+                    Nuevo
+                </th>
+            </thead>
+            <tbody>
+                <tr>
+                    <th class="text-left">Referencia</th>
+                    <td class="text-left">
+                        {{producto.Old?.Referencia}}
+                    </td>
+                    <td class="text-left" [class]="!producto.Old?'text-danger':''">
+                        <span *ngIf="producto.New.Referencia!=producto.Old?.Referencia">
+                            {{producto.New.Referencia}}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-left">Descripción</th>
+                    <td class="text-left"
+                        [class]="producto.New.Descripcion!=producto.Old?.Descripcion?'text-danger':''">
+                        {{producto.Old?.Descripcion}}
+                    </td>
+                    <td class="text-left">
+                        <span *ngIf="producto.New.Descripcion!=producto.Old?.Descripcion">
+                            {{producto.New.Descripcion}}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-left">Precio (coste)</th>
+                    <td>
+                        {{producto.Old?.PrecioCoste}}
+                    </td>
+                    <td>
+                        <span *ngIf="producto.New.PrecioCoste>(producto.Old?.PrecioCoste || 0)">
+                            {{producto.New.PrecioCoste}}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-left">Precio (venta)</th>
+                    <td [class]="producto.Old && producto.New.PrecioVenta>producto.Old.PrecioVenta?'text-danger':''">
+                        {{producto.Old?.PrecioVenta}}
+                    </td>
+                    <td>
+                        <span *ngIf="producto.New.PrecioVenta>(producto.Old?.PrecioVenta||0)">
+                            {{producto.New.PrecioVenta}}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>IVA</th>
+                    <td [class]="producto.Old && producto.New.IVA>producto.Old.IVA?'text-danger':''">
+                        {{producto.Old?.IVA}}
+                    </td>
+                    <td>
+                        <span *ngIf="producto.New.IVA>(producto.Old?.IVA||0)">
+                            {{producto.New.IVA}}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Margen</th>
+                    <td [class]="producto.Old && producto.New.Margen!=producto.Old.Margen?'text-danger':''">
+                        {{producto.Old?.Margen?.toFixed(2)}}
+                    </td>
+                    <td>
+                        <span *ngIf="producto.New.Margen!=producto.Old?.Margen">
+                            {{producto.New.Margen.toFixed(2)}}
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    }
+</div>
+<input type="button" value="a texto">
+<pre>
+    {{arrayToTabulatedText()}}
+</pre>
