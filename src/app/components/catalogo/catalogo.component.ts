@@ -1,11 +1,9 @@
 import { Component, output } from '@angular/core';
 import { Papa } from 'ngx-papaparse';
 import { Catalogo } from '../../models/catalogo';
-import { ImageLinkComponent } from "../../image-link/image-link.component";
 
 @Component({
   selector: 'app-catalogo',
-  imports: [ImageLinkComponent],
   templateUrl: './catalogo.component.html',
   styleUrl: './catalogo.component.scss'
 })
