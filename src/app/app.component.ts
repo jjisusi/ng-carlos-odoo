@@ -80,7 +80,7 @@ export class AppComponent {
                     updated.Descripcion = art.Articulo.replace("NNN ","");
                     hasChanged = true;
                 }
-                if (found.PrecioCoste < art.Precio) {
+                if (found.PrecioCoste != art.Precio && art.Precio!=0) {
                     updated.PrecioCoste = art.Precio;
                     updated.PrecioVenta=Math.round(art.Precio * 1.20 * 100)/100;
                     hasChanged = true;
