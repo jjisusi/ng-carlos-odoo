@@ -1,0 +1,15 @@
+stages:
+  - build
+  - deploy
+
+build-job:
+  stage: build
+  script:
+    - npm install
+    - npm run build
+
+deploy-job:
+  stage: deploy
+  script:
+    - echo "Desplegando aplicación..."
+    # aquí pondrías los comandos de tu servidor, docker o cloud
