@@ -35,9 +35,13 @@ export class AppComponent {
   }
   onCatalogUploaded(catalogo:Catalogo): void {
     this.catalogo=catalogo;
-    // if(this.factura.lineas.length){
-    //   this.generateUpdates();
-    // }
+    if(this.catalogo.productos.some(p=>!p.id)){
+      alert("El fichero que ha exportado no está preparado para exportar/importar, no olvide marcar el check 'Quiero actualizar datos (exportación compatible con importación)'");
+    }else if(this.catalogo.Size==80){
+      alert("Sólo ha importado 80 productos, si hay más en el catálogo no olvide seleccionar todos")
+    }else{
+      alert("El catálogo ha sido importado correctamente, puedes continuar al siguiente paso")
+    }
   }
   onInvoiceUploaded(factura:Factura): void {
     this.factura=factura;
