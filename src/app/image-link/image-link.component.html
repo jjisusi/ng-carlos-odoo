@@ -1,5 +1,5 @@
 <!-- Imagen clicable -->
-<img [src]="src" [height]="height" (click)="openModal()" style="cursor: pointer;">
+<img [src]="src"  (click)="openModal()" style="cursor: pointer;max-width: 90%;">
 
 <!-- Modal estilo Bootstrap 4 -->
 <div class="modal fade show" tabindex="-1" role="dialog" [ngClass]="{'d-block': showModal}" *ngIf="showModal">
