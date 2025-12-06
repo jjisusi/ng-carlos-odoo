@@ -14,5 +14,8 @@ export class Catalogo {
             this.productos.push(producto);
         }
     }
+    clear(){
+        this.productos=[];
+    }
 }
 

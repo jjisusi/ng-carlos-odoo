@@ -8,11 +8,12 @@ import { NovedadesComponent } from "./components/novedades/novedades.component";
 import { FacturaComponent } from './components/factura/factura.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
 import { UpdaterComponent } from './components/updater/updater.component';
+import { ExportOdooCatalogComponent } from "./components/export-odoo-catalog/export-odoo-catalog.component";
 
 
 @Component({
   selector: 'app-root',
-  imports: [CatalogoComponent, FacturaComponent,  NovedadesComponent,UpdaterComponent],
+  imports: [CatalogoComponent, FacturaComponent, NovedadesComponent, UpdaterComponent, ExportOdooCatalogComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -36,6 +37,7 @@ export class AppComponent {
   onCatalogUploaded(catalogo:Catalogo): void {
     this.catalogo=catalogo;
     if(this.catalogo.productos.some(p=>!p.id)){
+      this.catalogo.clear();
       alert("El fichero que ha exportado no está preparado para exportar/importar, no olvide marcar el check 'Quiero actualizar datos (exportación compatible con importación)'");
     }else if(this.catalogo.Size==80){
       alert("Sólo ha importado 80 productos, si hay más en el catálogo no olvide seleccionar todos")

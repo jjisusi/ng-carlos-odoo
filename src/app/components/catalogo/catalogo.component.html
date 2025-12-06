@@ -1,49 +1,13 @@
 <ol>
     <li>
-        <p>
-            Ve a catalogo de productos y ponlo en modo lista
-        </p>
-        <div>
-            <app-image-link src="images/catalog-canvan.jpg" [height]="250"></app-image-link>
-        </div>
-    </li>
-    <li>
-        <p>
-            <strong>Odoo : Seleccionar artículos</strong>
-        </p>
-        <p>
-            Pulsa el check a la izquierda para seleccionar todos los artículos (1) y a continuación en seleccionar todo
-        </p>
-        <div class="row">
-            <app-image-link src="images/catalog-select.jpg" [height]="250"></app-image-link>
-            <app-image-link src="images/catalog-select-all.jpg" [height]="250"></app-image-link>
-        </div>
-    </li>
-    <li>
-        <p>
-            <strong>Odoo : exportar artículos</strong>
-        </p>
-        <p>
-            Pulsa en acciones y a continuación exportar
-        </p>
-        <p>
-                En el menú exportar marca el check Quiero actualizar los datos , Formato de exportación CSV y seleccionar en
-        plantilla catalogo20250918. Después pulsa descargar.
-        </p>
-        <div class="row">
-            <app-image-link src="images/catalog-export.jpg" [height]="250"></app-image-link>
-            <app-image-link src="images/catalog-export-2.jpg" [height]="250"></app-image-link>
-        </div>
-    </li>
-    <li>
         <div class="form-group">
             <label>Sube el catálogo que has descargado y pasa al siguiente paso</label>
             <input class="d-block" type="file" id="fuCatalog" accept=".csv" (change)="upload($event)" />
         </div>
     </li>
 </ol>
-
-<div id="catalogo">
+@if(catalogo.Size>0){
+<div id="catalogo" >
     <table class="table table-stripped">
         <thead>
             <tr>
@@ -81,3 +45,4 @@
         </tbody>
     </table>
 </div>
+}
