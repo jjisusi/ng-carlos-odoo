@@ -6,6 +6,9 @@
             <input class="d-block" type="file" id="fuInvoice" accept=".pdf" (change)="uploadInvoicePdf($event)" />
         </div>
     </div> -->
+    <p>
+        Abre el pdf con la factura. Copia todo el contenido texto de la misma y pegalo en la siguiente caja.
+    </p>
     <div class="row">
         <div class="col-12 form-group">
             <textarea id="txtInvoice" class="form-control" rows="5" (change)="uploadInvoiceFromText()"></textarea>
@@ -13,7 +16,8 @@
         </div>
     </div>
 </form>
-<div id="desglose" class="w-25">
+<div class="row">
+<div id="desglose" class="col-12 col-md-4">
     <table class="table table-sm table-stripped">
         <thead>
             <th class="text-right">IVA</th>
@@ -56,6 +60,8 @@
         </tfoot>
     </table>
 </div>
+</div>
+
 <div id="articles">
     <table class="table table-sm table-stripped">
         <thead>
