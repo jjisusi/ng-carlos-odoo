@@ -1,7 +1,7 @@
 export class Producto {
     id: string;
     Referencia: string;
-    Descripcion: string;
+    Descripcion: string="";
     PrecioCoste: number;
     PrecioVenta: number;
     IVA: number;

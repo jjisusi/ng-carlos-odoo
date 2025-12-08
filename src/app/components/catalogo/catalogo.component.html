@@ -7,19 +7,32 @@
     </li>
 </ol>
 @if(catalogo.Size>0){
-<div id="catalogo" >
-    <table class="table table-stripped">
-        <thead>
+<div id="catalogo">
+    <p-table #tCatalogo [value]="this.catalogo.Productos" [paginator]="true" [rows]="10"
+        [tableStyle]="{ 'min-width': '50rem' }" [globalFilterFields]="['Descripcion']" stripedRows>
+        <!-- <ng-template #caption>
+        <div class="flex">
+            <p-iconfield iconPosition="left" class="ml-auto">
+                <p-inputicon>
+                    <i class="pi pi-search"></i>
+                </p-inputicon>
+                <input pInputText type="text" 
+                    (input)="tCatalogo.filterGlobal($event.target.value, 'contains')" 
+                    placeholder="Search keyword" />
+            </p-iconfield>
+        </div>
+    </ng-template> -->
+        <ng-template #header>
             <tr>
                 <th class="text-left">Descripción</th>
                 <th class="text-left">Referencia</th>
                 <th class="text-right">Precio (coste)</th>
                 <th class="text-right">Precio (venta)</th>
                 <th class="text-right">IVA</th>
+                <th class="text-right">Margen</th>
             </tr>
-        </thead>
-        <tbody>
-            @for (producto of this.catalogo.Productos.slice(0,50); track producto.id) {
+        </ng-template>
+        <ng-template #body let-producto>
             <tr>
                 <td class="text-left">
                     {{producto.Descripcion}}
@@ -40,9 +53,7 @@
                     {{producto.Margen.toFixed(2)}}
                 </td>
             </tr>
-
-            }
-        </tbody>
-    </table>
+        </ng-template>
+    </p-table>
 </div>
 }

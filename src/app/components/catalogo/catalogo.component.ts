@@ -1,10 +1,16 @@
 import { Component, output } from '@angular/core';
 import { Papa } from 'ngx-papaparse';
 import { Catalogo } from '../../models/catalogo';
+import { TableModule} from 'primeng/table';
+import { IconFieldModule} from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { InputTextModule } from 'primeng/inputtext';
+
 @Component({
   selector: 'app-catalogo',
   templateUrl: './catalogo.component.html',
-  styleUrl: './catalogo.component.scss'
+  styleUrl: './catalogo.component.scss',
+  imports:[TableModule, IconFieldModule,InputTextModule, InputIconModule]
 })
 export class CatalogoComponent {
   public catalogo: Catalogo = new Catalogo([]);

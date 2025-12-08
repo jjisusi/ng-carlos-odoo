@@ -3,10 +3,11 @@ import { Papa } from 'ngx-papaparse';
 import { Factura } from '../../models/Invoice';
 import { FacturaLinea } from '../../models/InvoiceLine';
 import { OcrService } from '../../services/ocr.service';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-factura',
-  imports: [],
+  imports: [TableModule],
   templateUrl: './factura.component.html',
   styleUrl: './factura.component.scss'
 })

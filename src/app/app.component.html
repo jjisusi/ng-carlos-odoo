@@ -1,10 +1,10 @@
-<p-toast />
+<p-toast [breakpoints]="{ '920px': { width: '50%', right: 'auto' } }"/>
 <div class="container-fluid">
     <div id="loader" class="loader"></div>
     <p-tabs value="0" scrollable>
         <p-tablist>
-            <p-tab value="0">Exportar Catálogo en Odoo</p-tab>
-            <p-tab value="1">Importar Catálogo</p-tab>
+            <p-tab value="0">Exportar</p-tab>
+            <p-tab value="1">Importar</p-tab>
             <p-tab value="2">Factura</p-tab>
             <p-tab value="3">Cambios</p-tab>
             <p-tab value="4">Consolidar</p-tab>

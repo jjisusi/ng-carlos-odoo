@@ -17,18 +17,9 @@ export class ImageLinkComponent {
 
   openModal() {
     this.showModal = true;
-    // añadimos backdrop manualmente
-    const backdrop = document.createElement('div');
-    backdrop.className = 'modal-backdrop fade show';
-    backdrop.id = 'custom-backdrop';
-    document.body.appendChild(backdrop);
   }
 
   closeModal() {
     this.showModal = false;
-    const backdrop = document.getElementById('custom-backdrop');
-    if (backdrop) {
-      backdrop.remove();
-    }
   }
 }
