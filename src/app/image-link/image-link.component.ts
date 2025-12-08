@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { Dialog } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-image-link',
   templateUrl: './image-link.component.html',
   styleUrls: ['./image-link.component.scss'],
-  imports:[CommonModule]
+  imports:[CommonModule,Dialog, ButtonModule]
 })
 export class ImageLinkComponent {
   @Input() src: string = '';

@@ -1,70 +1,54 @@
+<p-toast />
 <div class="container-fluid">
     <div id="loader" class="loader"></div>
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#tabCatalogoExport" type="button"
-                role="tab" aria-controls="home" aria-selected="true">Exportar Catálogo en Odoo</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="catalog-tab" data-bs-toggle="tab" data-bs-target="#tabCatalogo" type="button"
-                role="tab" aria-controls="home" aria-selected="true">Importar Catálogo</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="invoice-tab" data-bs-toggle="tab" data-bs-target="#invoice" type="button" role="tab"
-                aria-controls="invoice" aria-selected="false">Factura</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="updates-tab" data-bs-toggle="tab" data-bs-target="#updates" type="button" role="tab"
-                aria-controls="contact" aria-selected="false">Cambios</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="consolidate-tab" data-bs-toggle="tab" data-bs-target="#consolidate" type="button"
-                role="tab" aria-controls="consolidate" aria-selected="false">Consolidar</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="novedades-tab" data-bs-toggle="tab" data-bs-target="#novedades" type="button"
-                role="tab" aria-controls="novedades" aria-selected="false">Novedades</button>
-        </li>
+    <p-tabs value="0" scrollable>
+        <p-tablist>
+            <p-tab value="0">Exportar Catálogo en Odoo</p-tab>
+            <p-tab value="1">Importar Catálogo</p-tab>
+            <p-tab value="2">Factura</p-tab>
+            <p-tab value="3">Cambios</p-tab>
+            <p-tab value="4">Consolidar</p-tab>
+            <p-tab value="5">Novedades</p-tab>
+        </p-tablist>
 
-    </ul>
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="tabCatalogoExport" role="tabpanel" aria-labelledby="home-tab">
-            <app-export-odoo-catalog></app-export-odoo-catalog>
-        </div>
-        <div class="tab-pane fade show" id="tabCatalogo" role="tabpanel" aria-labelledby="catalog-tab">
-            <app-catalogo (uploaded)="onCatalogUploaded($event)"></app-catalogo>
-        </div>
-        <div class="tab-pane fade" id="invoice" role="tabpanel" aria-labelledby="invoice-tab">
-            <app-factura (uploaded)="onInvoiceUploaded($event)"></app-factura>
-        </div>
-        <div class="tab-pane fade" id="updates" role="tabpanel" aria-labelledby="updates-tab">
-            <app-updater [updates]="updates" ></app-updater>
-        </div>
-        <div class="tab-pane fade" id="consolidate" role="tabpanel" aria-labelledby="consolidate-tab">
-            <button id="btnDownload" class="btn btn-primary" (click)="consolidateUpdates()">Consolidar
-                datos</button>
+        <p-tabpanels>
+            <p-tabpanel value="0">
+                <app-export-odoo-catalog></app-export-odoo-catalog>
+            </p-tabpanel>
+            <p-tabpanel value="1">
+                <app-catalogo (uploaded)="onCatalogUploaded($event)"></app-catalogo>
+            </p-tabpanel>
+            <p-tabpanel value="2">
+                <app-factura (uploaded)="onInvoiceUploaded($event)"></app-factura>
+            </p-tabpanel>
+            <p-tabpanel value="3">
+                <app-updater [updates]="updates"></app-updater>
+            </p-tabpanel>
+            <p-tabpanel value="4">
+                <button id="btnDownload" class="btn btn-primary" (click)="consolidateUpdates()">Consolidar
+                    datos</button>
+            </p-tabpanel>
+            <p-tabpanel value="5">
 
-        </div>
-
-        <div class="tab-pane fade" id="novedades" role="tabpanel" aria-labelledby="novedades-tab">
-            <app-novedades (uploaded)="procesarNovedades($event)"></app-novedades>
-            @if(this.novedades.length){
-                @for (producto of this.novedades; track producto.id) {
-                <div class="col-sm-4">
-                    <div class="card">
-                        <img src="data:image/jpeg;base64,{{producto.Imagen}}" height="150">
-                        <div class="card-body">
-                            <h5 class="card-title">{{producto.Referencia}}</h5>
+                <div class="tab-pane fade" id="novedades" role="tabpanel" aria-labelledby="novedades-tab">
+                    <app-novedades (uploaded)="procesarNovedades($event)"></app-novedades>
+                    @if(this.novedades.length){
+                    @for (producto of this.novedades; track producto.id) {
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <img src="data:image/jpeg;base64,{{producto.Imagen}}" height="150">
+                            <div class="card-body">
+                                <h5 class="card-title">{{producto.Referencia}}</h5>
+                            </div>
                         </div>
                     </div>
+                    }
+                    }
+                    @else {
+                    No hay novedades
+                    }
                 </div>
-                }
-            }
-            @else {
-                No hay novedades
-            }
-
-        </div>
-    </div>
+            </p-tabpanel>
+        </p-tabpanels>
+    </p-tabs>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>

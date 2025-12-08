@@ -9,13 +9,16 @@ import { FacturaComponent } from './components/factura/factura.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
 import { UpdaterComponent } from './components/updater/updater.component';
 import { ExportOdooCatalogComponent } from "./components/export-odoo-catalog/export-odoo-catalog.component";
-
+import { MessageService } from 'primeng/api';
+import { Toast } from 'primeng/toast';
+import { TabsModule } from 'primeng/tabs';
 
 @Component({
   selector: 'app-root',
-  imports: [CatalogoComponent, FacturaComponent, NovedadesComponent, UpdaterComponent, ExportOdooCatalogComponent],
+  imports: [CatalogoComponent, FacturaComponent, NovedadesComponent, UpdaterComponent, ExportOdooCatalogComponent, Toast,TabsModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  providers:[MessageService]
 })
 export class AppComponent {
   title = 'ng-carlos-odoo';
@@ -25,24 +28,30 @@ export class AppComponent {
   updates: Update[] = [];
   inserts: Producto[] = [];
   novedades:Producto[] = [];
-  constructor(private papa: Papa) {
-    const csvData = '"Hello","World!"';
-
-    this.papa.parse(csvData, {
-      complete: (result) => {
-        console.log('Parsed: ', result);
-      }
-    });
+  constructor(
+    private messageService: MessageService
+  ) {
   }
   onCatalogUploaded(catalogo:Catalogo): void {
     this.catalogo=catalogo;
     if(this.catalogo.productos.some(p=>!p.id)){
       this.catalogo.clear();
-      alert("El fichero que ha exportado no está preparado para exportar/importar, no olvide marcar el check 'Quiero actualizar datos (exportación compatible con importación)'");
+      this.messageService.add({ 
+        severity: 'error', 
+        summary: 'Error', 
+        detail: "El fichero que ha exportado no está preparado para exportar/importar, no olvide marcar el check 'Quiero actualizar datos (exportación compatible con importación)'" 
+      });
     }else if(this.catalogo.Size==80){
-      alert("Sólo ha importado 80 productos, si hay más en el catálogo no olvide seleccionar todos")
+      this.messageService.add({ 
+        severity: 'error', 
+        summary: 'Error', 
+        detail: "Sólo ha importado 80 productos, si hay más en el catálogo no olvide seleccionar todos" 
+      });
     }else{
-      alert("El catálogo ha sido importado correctamente, puedes continuar al siguiente paso")
+      this.messageService.add({ 
+        severity: 'success', 
+        detail: "El catálogo ha sido importado correctamente, puedes continuar al siguiente paso" 
+      });
     }
   }
   onInvoiceUploaded(factura:Factura): void {

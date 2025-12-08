@@ -54,11 +54,6 @@ async uploadInvoicePdf(event: Event) {
     }
     this.factura = new Factura(albaran);
     this.uploaded.emit(this.factura);
-    // document.getElementById("desglose").innerHTML = invoice.Desglose.toTable();
-    // document.getElementById("articles").innerHTML = albaran.toTable(["Referencia", "Articulo", "Cantidad", "PrecioCoste", "IVA", "Descuento", "Importe"]);
-    // var someTabTriggerEl = document.querySelector('#updates-tab')
-    // var tab = new bootstrap.Tab(someTabTriggerEl);
-
   }
   extraerProductos(texto:string) {
 

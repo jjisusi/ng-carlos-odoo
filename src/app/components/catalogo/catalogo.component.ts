@@ -1,7 +1,6 @@
 import { Component, output } from '@angular/core';
 import { Papa } from 'ngx-papaparse';
 import { Catalogo } from '../../models/catalogo';
-
 @Component({
   selector: 'app-catalogo',
   templateUrl: './catalogo.component.html',

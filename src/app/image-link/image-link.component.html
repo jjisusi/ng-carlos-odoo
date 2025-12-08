@@ -1,19 +1,12 @@
 <!-- Imagen clicable -->
-<img [src]="src"  (click)="openModal()" style="cursor: pointer;max-width: 90%;">
-
-<!-- Modal estilo Bootstrap 4 -->
-<div class="modal fade show" tabindex="-1" role="dialog" [ngClass]="{'d-block': showModal}" *ngIf="showModal">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Vista previa</h5>
-        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
-          <span aria-hidden="true">&times;</span> <!-- la X en Bootstrap 4 -->
-        </button>
-      </div>
-      <div class="modal-body text-center">
-        <img [src]="src" class="img-fluid">
-      </div>
+<img [src]="src" [height]="height"  (click)="openModal()" style="cursor: pointer;max-width: 90%;">
+<p-dialog header="Edit Profile" [modal]="true" [(visible)]="showModal" [style]="{ width: '25rem' }">
+    <span class="p-text-secondary block mb-8">Vista previa</span>
+    <div class="flex items-center gap-4 mb-4">
+      <img [src]="src" class="img-fluid">
     </div>
-  </div>
-</div>
+    <div class="flex justify-end gap-2">
+        <p-button label="Cancel" severity="secondary" (click)="showModal = false" />
+        <p-button label="Save" (click)="showModal = false" />
+    </div>
+</p-dialog>
