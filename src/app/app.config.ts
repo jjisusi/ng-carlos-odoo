@@ -4,16 +4,19 @@ import Aura from '@primeuix/themes/aura';
 
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
+import { MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }), 
-    provideRouter(routes),
-    providePrimeNG({
-            theme: {
-                preset: Aura
-            }
-        })
+    
+        provideZoneChangeDetection({ eventCoalescing: true }), 
+        provideRouter(routes),
+        providePrimeNG({
+                theme: {
+                    preset: Aura
+                }
+            }),
+        MessageService
     ]
 };
 
