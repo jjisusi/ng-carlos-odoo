@@ -1,10 +1,11 @@
 import { Component, Input, output } from '@angular/core';
 import { CsvService } from '../../services/csv-service';
 import { Update } from '../../models/Update';
+import { ImageLinkComponent } from '../../image-link/image-link.component';
 
 @Component({
   selector: 'app-consolidation',
-  imports: [],
+  imports: [ImageLinkComponent],
   templateUrl: './consolidation.html',
   styleUrl: './consolidation.scss',
 })

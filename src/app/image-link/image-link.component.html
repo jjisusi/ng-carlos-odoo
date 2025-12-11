@@ -1,7 +1,6 @@
 <!-- Imagen clicable -->
 <img [src]="src" [height]="height"  (click)="openModal()" style="cursor: pointer;max-width: 90%;">
-<p-dialog header="Edit Profile" [modal]="true" [(visible)]="showModal" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '50vw' }">
-    <span class="p-text-secondary block mb-8">Vista previa</span>
+<p-dialog header="Vista previa" [modal]="true" [(visible)]="showModal" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '50vw' }">
     <div class="flex items-center gap-4 mb-4">
       <img [src]="src" class="img-fluid">
     </div>

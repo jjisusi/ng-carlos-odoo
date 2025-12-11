@@ -42,89 +42,94 @@
         </div>
     </div>
     } -->
-    @for (producto of updates || []; track producto.New.id) {
-    <div class="col-12 col-md-6">
-        <table class="table table-stripped tabl-bordered">
-            <thead>
-                <th>
-                </th>
-                <th>
-                    Anterior
-                </th>
-                <th>
-                    Nuevo
-                </th>
-            </thead>
-            <tbody>
-                <tr>
-                    <th class="text-left">Referencia</th>
-                    <td class="text-left">
-                        {{producto.Old?.Referencia}}
-                    </td>
-                    <td class="text-left" [class]="!producto.Old?'text-danger':''">
-                        <span *ngIf="producto.New.Referencia!=producto.Old?.Referencia">
-                            {{producto.New.Referencia}}
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="text-left">Descripción</th>
-                    <td class="text-left"
-                        [class]="producto.New.Descripcion!=producto.Old?.Descripcion?'text-danger':''">
-                        {{producto.Old?.Descripcion}}
-                    </td>
-                    <td class="text-left">
-                        <span *ngIf="producto.New.Descripcion!=producto.Old?.Descripcion">
-                            {{producto.New.Descripcion}}
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="text-left">Precio (coste)</th>
-                    <td>
-                        {{producto.Old?.PrecioCoste}}
-                    </td>
-                    <td>
-                        <span *ngIf="producto.New.PrecioCoste>(producto.Old?.PrecioCoste || 0)">
-                            {{producto.New.PrecioCoste}}
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="text-left">Precio (venta)</th>
-                    <td [class]="producto.Old && producto.New.PrecioVenta>producto.Old.PrecioVenta?'text-danger':''">
-                        {{producto.Old?.PrecioVenta}}
-                    </td>
-                    <td>
-                        <span *ngIf="producto.New.PrecioVenta>(producto.Old?.PrecioVenta||0)">
-                            {{producto.New.PrecioVenta}}
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <th>IVA</th>
-                    <td [class]="producto.Old && producto.New.IVA>producto.Old.IVA?'text-danger':''">
-                        {{producto.Old?.IVA}}
-                    </td>
-                    <td>
-                        <span *ngIf="producto.New.IVA>(producto.Old?.IVA||0)">
-                            {{producto.New.IVA}}
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Margen</th>
-                    <td [class]="producto.Old && producto.New.Margen!=producto.Old.Margen?'text-danger':''">
-                        {{producto.Old?.Margen?.toFixed(2)}}
-                    </td>
-                    <td>
-                        <span *ngIf="producto.New.Margen!=producto.Old?.Margen">
-                            {{producto.New.Margen.toFixed(2)}}
-                        </span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    @if(updates.length>0){
+        @for (producto of updates || []; track producto.New.id) {
+        <div class="col-12 col-md-6">
+            <table class="table table-stripped tabl-bordered">
+                <thead>
+                    <th>
+                    </th>
+                    <th>
+                        Anterior
+                    </th>
+                    <th>
+                        Nuevo
+                    </th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th class="text-left">Referencia</th>
+                        <td class="text-left">
+                            {{producto.Old?.Referencia}}
+                        </td>
+                        <td class="text-left" [class]="!producto.Old?'text-danger':''">
+                            <span *ngIf="producto.New.Referencia!=producto.Old?.Referencia">
+                                {{producto.New.Referencia}}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-left">Descripción</th>
+                        <td class="text-left"
+                            [class]="producto.New.Descripcion!=producto.Old?.Descripcion?'text-danger':''">
+                            {{producto.Old?.Descripcion}}
+                        </td>
+                        <td class="text-left">
+                            <span *ngIf="producto.New.Descripcion!=producto.Old?.Descripcion">
+                                {{producto.New.Descripcion}}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-left">Precio (coste)</th>
+                        <td>
+                            {{producto.Old?.PrecioCoste}}
+                        </td>
+                        <td>
+                            <span *ngIf="producto.New.PrecioCoste>(producto.Old?.PrecioCoste || 0)">
+                                {{producto.New.PrecioCoste}}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-left">Precio (venta)</th>
+                        <td [class]="producto.Old && producto.New.PrecioVenta>producto.Old.PrecioVenta?'text-danger':''">
+                            {{producto.Old?.PrecioVenta}}
+                        </td>
+                        <td>
+                            <span *ngIf="producto.New.PrecioVenta>(producto.Old?.PrecioVenta||0)">
+                                {{producto.New.PrecioVenta}}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>IVA</th>
+                        <td [class]="producto.Old && producto.New.IVA>producto.Old.IVA?'text-danger':''">
+                            {{producto.Old?.IVA}}
+                        </td>
+                        <td>
+                            <span *ngIf="producto.New.IVA>(producto.Old?.IVA||0)">
+                                {{producto.New.IVA}}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Margen</th>
+                        <td [class]="producto.Old && producto.New.Margen!=producto.Old.Margen?'text-danger':''">
+                            {{producto.Old?.Margen?.toFixed(2)}}
+                        </td>
+                        <td>
+                            <span *ngIf="producto.New.Margen!=producto.Old?.Margen">
+                                {{producto.New.Margen.toFixed(2)}}
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        }
+    }
+    @if(updates.length==0){
+        No hay cambios en el catálogo
     }
 </div>
