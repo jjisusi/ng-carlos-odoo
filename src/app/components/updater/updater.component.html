@@ -1,4 +1,47 @@
 <div class="row">
+
+    <!-- <div class="row">
+        <div class="col-12 col-md-1">Referencia</div>
+        <div class="col-12 col-md-7">Descripción</div>
+        <div class="col-12 col-md-1">Precio(coste)</div>
+        <div class="col-12 col-md-1">Precio(venta)</div>
+        <div class="col-12 col-md-1">IVA</div>
+        <div class="col-12 col-md-1">Margen</div>
+    </div>
+    @for (producto of updates || []; track producto.New.id) {
+    <div class="row">
+        <div class="col-12 col-md-1" [class]="!producto.Old?'text-danger':''">
+            {{producto.New.Referencia}}
+        </div>
+        <div class="col-12 col-md-7">
+            <p [class]="producto.New.Descripcion!=producto.Old?.Descripcion?'text-danger':''">
+                {{producto.New.Descripcion}}
+            </p>
+            @if(producto.New.Descripcion!=producto.Old?.Descripcion){
+            <p style="text-decoration: line-through;">
+                {{producto.Old?.Descripcion}}
+            </p>
+            }
+        </div>
+        <div class="col-12 col-md-1">
+            {{producto.New.PrecioCoste}}
+            @if(producto.New.PrecioCoste!=producto.Old?.PrecioCoste){
+            <p style="text-decoration: line-through;">
+                {{producto.Old?.PrecioCoste}}
+            </p>
+            }
+        </div>
+        <div class="col-12 col-md-1">
+            {{producto.New.PrecioVenta}}
+        </div>
+        <div class="col-12 col-md-1">
+            {{producto.New.IVA}}
+        </div>
+        <div class="col-12 col-md-1">
+            {{producto.New.Margen.toFixed(2)}}
+        </div>
+    </div>
+    } -->
     @for (producto of updates || []; track producto.New.id) {
     <div class="col-12 col-md-6">
         <table class="table table-stripped tabl-bordered">

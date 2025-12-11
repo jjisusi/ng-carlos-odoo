@@ -24,8 +24,8 @@
                 <app-updater [updates]="updates"></app-updater>
             </p-tabpanel>
             <p-tabpanel value="4">
-                <button id="btnDownload" class="btn btn-primary" (click)="consolidateUpdates()">Consolidar
-                    datos</button>
+                <app-consolidation [updates]="updates"></app-consolidation>
+
             </p-tabpanel>
             <p-tabpanel value="5">
 

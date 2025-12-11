@@ -12,10 +12,11 @@ import { ExportOdooCatalogComponent } from "./components/export-odoo-catalog/exp
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
 import { TabsModule } from 'primeng/tabs';
+import { Consolidation } from "./components/consolidation/consolidation";
 
 @Component({
   selector: 'app-root',
-  imports: [CatalogoComponent, FacturaComponent, NovedadesComponent, UpdaterComponent, ExportOdooCatalogComponent, Toast,TabsModule],
+  imports: [CatalogoComponent, FacturaComponent, NovedadesComponent, UpdaterComponent, ExportOdooCatalogComponent, Toast, TabsModule, Consolidation],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers:[MessageService]
