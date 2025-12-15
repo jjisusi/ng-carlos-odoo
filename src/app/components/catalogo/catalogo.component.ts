@@ -6,6 +6,7 @@ import { IconFieldModule} from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageService } from 'primeng/api';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-catalogo',
