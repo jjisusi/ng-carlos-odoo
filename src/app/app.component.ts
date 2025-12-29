@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Papa } from 'ngx-papaparse';
 import { Factura } from './models/Invoice';
 import { Catalogo } from './models/catalogo';
@@ -31,6 +31,9 @@ export class AppComponent {
   updates: Update[] = [];
   inserts: Producto[] = [];
   novedades: Producto[] = [];
+
+  @ViewChild('catalogo') catalog!: CatalogoComponent;
+  
   constructor(
     private messageService: MessageService,
     private odooService: OdooExportService
@@ -113,15 +116,13 @@ export class AppComponent {
           this.messageService.add({
             severity: 'success',
             detail: "Los cambios se han subido correctamente a Odoo"
-          })
+          });this.catalog.callService();
         },
         error: err => this.messageService.add({
           severity: 'error',
           detail: "Ha ocurrido un error al subir los cambios a Odoo, consulte al técnico"
         })
       });
-    // const csv = this.updates.filter(x=>x.Active).map(x=>x.New).toCSV(["id", "Referencia", "Descripcion", "PrecioCoste", "PrecioVenta", "TipoImpuestoVenta","TipoImpuestoCompra"]);
-    // CSV.download(csv, "toImport.csv");
   }
   procesarNovedades(items: Producto[]) {
     this.novedades = [];
@@ -132,40 +133,6 @@ export class AppComponent {
         this.novedades.push(novedad);
       }
     }
-  }
-}
-class CSV {
-
-  toJSON() {
-    // Papa.parse(this.csv, {
-    //     header: true, // Usa la primera fila como claves
-    //     skipEmptyLines: true,
-    //     complete: function (results) {
-    //         lista = results.data;
-    //         output.textContent = JSON.stringify(lista, null, 2);
-    //     },
-    //     error: function (err) {
-    //         output.textContent = 'Error al procesar el CSV: ' + err.message;
-    //     }
-    // });
-  }
-  public static download = function (csvContent: string, nombreArchivo: String) {
-    // 2. Crea un Blob y una URL
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-
-    // 3. Crea y simula un clic en el enlace de descarga
-    const enlace = document.createElement('a');
-    enlace.setAttribute('href', url);
-    enlace.setAttribute('download', nombreArchivo + '.csv'); // 4. Asigna el nombre del archivo
-
-    enlace.style.display = 'none'; // Oculta el enlace
-    document.body.appendChild(enlace);
-
-    enlace.click(); // 5. Simula el clic
-
-    document.body.removeChild(enlace); // 6. Elimina el enlace
-    URL.revokeObjectURL(url); // Libera la URL del objeto
   }
 }
 

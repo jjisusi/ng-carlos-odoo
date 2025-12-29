@@ -16,7 +16,7 @@
 
         <p-tabpanels>
             <p-tabpanel [value]="0">
-                <app-catalogo (uploaded)="onCatalogUploaded($event)"></app-catalogo>
+                <app-catalogo #catalogo (uploaded)="onCatalogUploaded($event)"></app-catalogo>
             </p-tabpanel>
             <p-tabpanel [value]="1">
                 <app-factura (uploaded)="onInvoiceUploaded($event)"></app-factura>

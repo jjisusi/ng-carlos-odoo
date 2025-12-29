@@ -28,34 +28,8 @@ export class CatalogoComponent {
   ) {
     this.callService();
   }
-  public upload(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const file = input.files?.[0];
-    if (!file) return;
-    const lastModified = file.lastModified;
-    const now = Date.now();
-
-    const diffHours = (now - lastModified) / (1000 * 60 * 60);
-
-    if (diffHours > 24) {
-      this.messages.add({ 
-        severity: 'warn', 
-        detail: "⚠️ El archivo fue modificado hace más de 24 horas" 
-      });
-    }
-    this.papa.parse(file, {
-      header: true,
-      skipEmptyLines: true,
-      complete: (results) => {
-        this.catalogo = new Catalogo(results.data);
-        this.uploaded.emit(this.catalogo);
-      },
-      error: (err) => {
-        console.error('Error al procesar el CSV:', err.message);
-      }
-    });
-  }
   callService(){
+    debugger;
     this.loading =true;
     this.odoo.getProducts()
     .pipe(

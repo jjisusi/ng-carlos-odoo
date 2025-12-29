@@ -1,4 +1,3 @@
-
 <!-- <button class="d-block btn btn-primary" id="btnCatalog" accept=".csv" (click)="callService()">Importar el catálogo de odoo</button> -->
 
 
@@ -6,18 +5,17 @@
 <div id="catalogo">
     <p-table #tCatalogo [value]="this.catalogo.Productos" [paginator]="true" [rows]="10"
         [tableStyle]="{ 'min-width': '50rem' }" [globalFilterFields]="['Descripcion']" stripedRows>
-        <!-- <ng-template #caption>
-        <div class="flex">
-            <p-iconfield iconPosition="left" class="ml-auto">
-                <p-inputicon>
-                    <i class="pi pi-search"></i>
-                </p-inputicon>
-                <input pInputText type="text" 
-                    (input)="tCatalogo.filterGlobal($event.target.value, 'contains')" 
-                    placeholder="Search keyword" />
-            </p-iconfield>
-        </div>
-    </ng-template> -->
+        <ng-template #caption>
+            <div class="flex">
+                <p-iconfield iconPosition="left" class="ml-auto">
+                    <p-inputicon>
+                        <i class="pi pi-search"></i>
+                    </p-inputicon>
+                    <input pInputText type="text" (input)="tCatalogo.filterGlobal($event.target.value, 'contains')"
+                        placeholder="Buscar producto..." />
+                </p-iconfield>
+            </div>
+        </ng-template>
         <ng-template #header>
             <tr>
                 <th class="text-left">Descripción</th>
@@ -54,7 +52,7 @@
 </div>
 }
 @if(loading){
-    <div class="card flex justify-center">
-        <p-progress-spinner ariaLabel="loading" />
-    </div>
+<div class="card flex justify-center">
+    <p-progress-spinner ariaLabel="loading" />
+</div>
 }
