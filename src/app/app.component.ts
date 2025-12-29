@@ -22,7 +22,7 @@ import { MessageService } from 'primeng/api';
 })
 export class AppComponent {
   title = 'ng-carlos-odoo';
-  tabSelected="0";
+  currentTab:number=0;
   catalogo: Catalogo = new Catalogo([]);
   factura: Factura=new Factura([]);
   updates: Update[] = [];
@@ -33,29 +33,12 @@ export class AppComponent {
   ) {
   }
   onCatalogUploaded(catalogo:Catalogo): void {
-    this.catalogo=catalogo;
-    if(this.catalogo.productos.some(p=>!p.id)){
-      this.catalogo.clear();
-      this.messageService.add({ 
-        severity: 'error', 
-        sticky:true,
-        summary: 'Error', 
-        detail: "El fichero que ha exportado no está preparado para exportar/importar, no olvide marcar el check 'Quiero actualizar datos (exportación compatible con importación)'" 
-      });
-    }else if(this.catalogo.Size==80){
-      this.messageService.add({ 
-        severity: 'error', 
-        sticky:true,
-        summary: 'Error', 
-        detail: "Sólo ha importado 80 productos, si hay más en el catálogo no olvide seleccionar todos" 
-      });
-    }else{
+
       this.messageService.add({ 
         severity: 'success', 
         detail: "El catálogo ha sido importado correctamente, puedes continuar al siguiente paso" 
       });
-      // this.tabSelected="3";
-    }
+      this.currentTab=this.currentTab + 1;
   }
   onInvoiceUploaded(factura:Factura): void {
     this.factura=factura;

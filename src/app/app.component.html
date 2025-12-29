@@ -1,7 +1,7 @@
 <p-toast [breakpoints]="{ '920px': { width: '50%', right: 'auto' } }"/>
 <div class="container-fluid">
     <div id="loader" class="loader"></div>
-    <p-tabs value="0" scrollable>
+    <p-tabs [value]="currentTab" scrollable>
         <p-tablist>
             <p-tab value="0">1 - Importar</p-tab>
             <p-tab value="1">2 - Factura</p-tab>
@@ -10,20 +10,20 @@
         </p-tablist>
 
         <p-tabpanels>
-            <p-tabpanel value="0">
+            <p-tabpanel [value]="0">
                 <app-catalogo (uploaded)="onCatalogUploaded($event)"></app-catalogo>
             </p-tabpanel>
-            <p-tabpanel value="1">
+            <p-tabpanel [value]="1">
                 <app-factura (uploaded)="onInvoiceUploaded($event)"></app-factura>
             </p-tabpanel>
-            <p-tabpanel value="2">
+            <p-tabpanel [value]="2">
                 <app-updater [updates]="updates"></app-updater>
             </p-tabpanel>
-            <p-tabpanel value="3">
+            <p-tabpanel [value]="3">
                 <app-consolidation [updates]="updates"></app-consolidation>
 
             </p-tabpanel>
-            <p-tabpanel value="4">
+            <p-tabpanel [value]="4">
 
                 <div class="tab-pane fade" id="novedades" role="tabpanel" aria-labelledby="novedades-tab">
                     <app-novedades (uploaded)="procesarNovedades($event)"></app-novedades>
