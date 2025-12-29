@@ -1,4 +1,9 @@
-<p-toast [breakpoints]="{ '920px': { width: '50%', right: 'auto' } }"/>
+<p-toast [breakpoints]="{ '920px': { width: '50%', right: 'auto' } }" />
+@if(loading){
+<div class="card flex justify-center">
+    <p-progress-spinner ariaLabel="loading" />
+</div>
+}
 <div class="container-fluid">
     <div id="loader" class="loader"></div>
     <p-tabs [value]="currentTab" scrollable>
@@ -20,8 +25,15 @@
                 <app-updater [updates]="updates"></app-updater>
             </p-tabpanel>
             <p-tabpanel [value]="3">
-                <app-consolidation [updates]="updates"></app-consolidation>
-
+                <ol>
+                    <li>
+                        Pulse el botón para aceptar los cambios a consolidar. Los cambios se subirán a odoo
+                        <p>
+                            <button id="btnDownload" class="btn btn-primary" (click)="consolidateUpdates()">Consolidar
+                                datos</button>
+                        </p>
+                    </li>
+                </ol>
             </p-tabpanel>
             <p-tabpanel [value]="4">
 

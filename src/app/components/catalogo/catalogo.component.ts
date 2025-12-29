@@ -26,6 +26,7 @@ export class CatalogoComponent {
     private messages:MessageService,
     private odoo:OdooExportService
   ) {
+    this.callService();
   }
   public upload(event: Event) {
     const input = event.target as HTMLInputElement;
