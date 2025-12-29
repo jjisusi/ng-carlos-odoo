@@ -33,7 +33,6 @@ export class AppComponent {
   ) {
   }
   onCatalogUploaded(catalogo:Catalogo): void {
-
       this.messageService.add({ 
         severity: 'success', 
         detail: "El catálogo ha sido importado correctamente, puedes continuar al siguiente paso" 
