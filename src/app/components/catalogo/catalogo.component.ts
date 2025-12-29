@@ -68,6 +68,10 @@ export class CatalogoComponent {
           this.uploaded.emit(this.catalogo);
         }, error: (err) => { 
           console.error('Error al obtener productos:', err); 
+           this.messages.add({ 
+            severity: 'error', 
+            detail: "Error al obtener productos. Consulte al servicio técnico de IsusiSoft" 
+          });
         }
       });
   }

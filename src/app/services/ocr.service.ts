@@ -1,11 +1,19 @@
 import { Injectable } from '@angular/core';
 import { createWorker } from 'tesseract.js';
 import * as pdfjsLib from 'pdfjs-dist';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OcrService {
+  apiUrl: string= environment.apiUrl + "/ocr";
+  constructor(
+    private http:HttpClient
+  ){
+
+  }
   async analyzeInvoice(file: File): Promise<string[]> {
     const pdfData = await file.arrayBuffer();
     const pdf = await (pdfjsLib as any).getDocument({ data: pdfData }).promise;
@@ -30,4 +38,9 @@ export class OcrService {
     await worker.terminate();
     return results;
   }
+
+  uploadInvoice(file: File) { 
+    const formData = new FormData(); 
+    formData.append("file", file); 
+    return this.http.post(this.apiUrl + "/invoice", formData); }
 }

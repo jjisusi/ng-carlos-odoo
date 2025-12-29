@@ -4,6 +4,7 @@ import { Factura } from '../../models/Invoice';
 import { FacturaLinea } from '../../models/InvoiceLine';
 import { OcrService } from '../../services/ocr.service';
 import { TableModule } from 'primeng/table';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-factura',
@@ -16,29 +17,27 @@ export class FacturaComponent {
   uploaded = output<Factura>();
   constructor(
     private papa: Papa,
+    private messages:MessageService,
     private ocrService: OcrService
   ) {
   }
 
 async uploadInvoicePdf(event: Event) {
+  
     const input = event.target as HTMLInputElement;
-    alert("Comienza OCR");
     const txtInvoice = document.getElementById("txtInvoice") as HTMLInputElement;
     if (!input.files) return;
-
-    txtInvoice.innerHTML += await this.ocrService.analyzeInvoice(input.files[0]);
-
-    // Limpieza de texto
-    const facturaRawArray = txtInvoice.innerHTML.split('\n').map(item => item.replace(/\|/g, '').trim());
-    txtInvoice.innerHTML = facturaRawArray.join('\n');
-
-    // Procesar productos
-    const albaran : FacturaLinea[] = [];
-    for (const item of this.extraerProductos(txtInvoice.innerHTML)) {
-      albaran.push(new FacturaLinea(item));
-    }
-    this.factura = new Factura(albaran);
-    alert("Fin OCR");
+    this.ocrService.uploadInvoice(input.files[0]).subscribe({
+      next:(data)=>{
+        txtInvoice.innerHTML += data;
+      },
+      error:()=>{
+          this.messages.add({ 
+            severity: 'error', 
+            detail: "Error al subir factura productos. Consulte al servicio técnico de IsusiSoft" 
+          });
+      }
+    })
   }
   updateProduct(){
     this.uploaded.emit(this.factura);

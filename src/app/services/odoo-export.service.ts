@@ -2,15 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Producto } from '../models/Producto';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OdooExportService {
 
-  // private apiUrl = 'https://carlos65-server.onrender.com/odoo';
- private apiUrl = 'http://localhost:3000/odoo';
-  constructor(private http: HttpClient) {}
+ private apiUrl = environment.apiUrl + "/odoo";
+  constructor(private http: HttpClient) {
+
+  }
 
   getProducts(): Observable<any> {
     // Pedimos el resultado como Blob para poder descargar el CSV
