@@ -1,10 +1,6 @@
-<ol>
-    <li>
-        <div class="form-group">
-            <button class="d-block" id="btnCatalog" accept=".csv" (click)="callService()">Importar el catálogo de odoo</button>
-        </div>
-    </li>
-</ol>
+
+<button class="d-block btn btn-primary" id="btnCatalog" accept=".csv" (click)="callService()">Importar el catálogo de odoo</button>
+
 
 @if(catalogo.Size>0){
 <div id="catalogo">
