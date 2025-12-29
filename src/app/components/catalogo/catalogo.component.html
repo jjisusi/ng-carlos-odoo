@@ -4,7 +4,9 @@
 @if(catalogo.Size>0){
 <div id="catalogo">
     <p-table #tCatalogo [value]="this.catalogo.Productos" [paginator]="true" [rows]="10"
-        [tableStyle]="{ 'min-width': '50rem' }" [globalFilterFields]="['Descripcion']" stripedRows>
+        [tableStyle]="{ 'min-width': '50rem' }" [showCurrentPageReport]="true"
+        currentPageReportTemplate="{first} a {last} de {totalRecords} productos" [globalFilterFields]="['Descripcion']"
+        stripedRows>
         <ng-template #caption>
             <div class="flex">
                 <p-iconfield iconPosition="left" class="ml-auto">
@@ -18,8 +20,18 @@
         </ng-template>
         <ng-template #header>
             <tr>
-                <th class="text-left">Descripción</th>
-                <th class="text-left">Referencia</th>
+                <th pSortableColumn="Descripcion" style="width:20%">
+                    <div class="flex items-center gap-2">
+                        Descripción
+                        <p-sortIcon field="Descripcion" />
+                    </div>
+                </th>
+                <th pSortableColumn="Referencia" style="width:20%">
+                    <div class="flex items-center gap-2">
+                        Referencia
+                        <p-sortIcon field="Referencia" />
+                    </div>
+                </th>
                 <th class="text-right">Precio (coste)</th>
                 <th class="text-right">Precio (venta)</th>
                 <th class="text-right">IVA</th>
