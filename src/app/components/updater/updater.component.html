@@ -26,7 +26,7 @@
                     <th class="text-left">Precio (coste)</th>
                     <td>
                         {{producto.New.PrecioCoste}}
-                        <span class="text-decoration-line-through" *ngIf="producto.New.PrecioCoste>(producto.Old?.PrecioCoste || 0)">
+                        <span class="text-decoration-line-through" *ngIf="producto.New.PrecioCoste!=(producto.Old?.PrecioCoste || 0)">
                             {{producto.Old?.PrecioCoste}}
                         </span> 
                     </td>
@@ -35,7 +35,7 @@
                     <th class="text-left">Precio (venta)</th>
                     <td>
                         {{producto.New.PrecioVenta}}
-                        <span  class="text-decoration-line-through"  *ngIf="producto.New.PrecioVenta>(producto.Old?.PrecioVenta||0)">
+                        <span  class="text-decoration-line-through"  *ngIf="producto.New.PrecioVenta!=(producto.Old?.PrecioVenta||0)">
                             {{producto.Old?.PrecioVenta}}
                         </span>
                     </td>
@@ -44,7 +44,7 @@
                     <th>IVA</th>
                     <td>
                         {{producto.New.IVA}}
-                        <span class="text-decoration-line-through" *ngIf="producto.New.IVA>(producto.Old?.IVA||0)">
+                        <span class="text-decoration-line-through" *ngIf="producto.New.IVA!=(producto.Old?.IVA||0)">
                             {{producto.Old?.IVA}}
                         </span>
                     </td>

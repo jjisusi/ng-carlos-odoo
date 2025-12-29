@@ -1,11 +1,11 @@
 <ol>
     <li>
         <div class="form-group">
-            <label>Sube el catálogo que has descargado y pasa al siguiente paso</label>
-            <input class="d-block" type="file" id="fuCatalog" accept=".csv" (change)="upload($event)" />
+            <button class="d-block" id="btnCatalog" accept=".csv" (click)="callService()">Importar el catálogo de odoo</button>
         </div>
     </li>
 </ol>
+
 @if(catalogo.Size>0){
 <div id="catalogo">
     <p-table #tCatalogo [value]="this.catalogo.Productos" [paginator]="true" [rows]="10"
@@ -56,4 +56,9 @@
         </ng-template>
     </p-table>
 </div>
+}
+@if(loading){
+    <div class="card flex justify-center">
+        <p-progress-spinner ariaLabel="loading" />
+    </div>
 }

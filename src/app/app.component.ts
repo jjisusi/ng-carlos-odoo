@@ -8,15 +8,14 @@ import { NovedadesComponent } from "./components/novedades/novedades.component";
 import { FacturaComponent } from './components/factura/factura.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
 import { UpdaterComponent } from './components/updater/updater.component';
-import { ExportOdooCatalogComponent } from "./components/export-odoo-catalog/export-odoo-catalog.component";
-import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
 import { TabsModule } from 'primeng/tabs';
 import { Consolidation } from "./components/consolidation/consolidation";
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
-  imports: [CatalogoComponent, FacturaComponent, NovedadesComponent, UpdaterComponent, ExportOdooCatalogComponent, Toast, TabsModule, Consolidation],
+  imports: [CatalogoComponent, FacturaComponent, NovedadesComponent, UpdaterComponent, Toast, TabsModule, Consolidation],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers:[MessageService]
