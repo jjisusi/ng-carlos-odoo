@@ -1,6 +1,10 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, Input, input, output, Output } from '@angular/core';
 import { Update } from '../../models/Update';
 import { CommonModule } from '@angular/common';
+import { Factura } from '../../models/Invoice';
+import { INPUTNUMBER_VALUE_ACCESSOR } from 'primeng/inputnumber';
+import { Catalogo } from '../../models/catalogo';
+import { Producto } from '../../models/Producto';
 
 @Component({
   selector: 'app-updater',
@@ -9,7 +13,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './updater.component.scss'
 })
 export class UpdaterComponent {
+  @Input() invoice! : Factura;
+  @Input() catalog!:Catalogo;
   @Input() updates: Update[] = [];
+
+  update= output<Update[]>();
 
   isAllChecked() {
     return !this.updates.some(x => !x.Active);
@@ -28,55 +36,54 @@ export class UpdaterComponent {
       productToUpdate.New.PrecioCoste = value;
     }
   }
+  generateUpdates() {
+    this.updates = [];
+    for (const art of this.invoice.lineas) {
 
+      const found: Producto | undefined = this.catalog.productos.find(x => x.Referencia == art.Referencia);
 
-  arrayToTabulatedText(): string {
+      //to-do : update catalog
+      if (!found) {
+        const nuevo = new Producto({});
+        nuevo.Referencia = art.Referencia,
+          nuevo.Descripcion = art.Articulo.replace("NNN ", ""),
+          nuevo.PrecioCoste = art.Precio,
+          nuevo.PrecioVenta = Math.round(art.Precio * 1.20 * 100) / 100,
+          nuevo.IVA = art.IVA
 
-    const data = this.updates.map(x => ({
-      Ref: x.New.Referencia,
-      Descripcion: x.New.Descripcion,
-      Coste: x.New.PrecioCoste,
-      Venta: x.New.PrecioVenta,
-      IVA: x.New.IVA,
-      Margen:x.New.Margen,
-      CosteAnt:x.Old?.PrecioCoste,
-      VentaAnt:x.Old?.PrecioVenta,
-      IVAAnt:x.Old?.IVA,
-      MargenAnt:x.Old?.Margen
-    }));
-    return data.map(x=> x.Ref.padEnd(7) 
-              + x.Descripcion.padEnd(50) 
-              + x.Coste.toFixed().padEnd(6) 
-              + x.Venta.toFixed(2).padEnd(6) 
-              +  x.Margen.toFixed(2).padEnd(6)
-              // +  (x.CosteAnt && x.CosteAnt.toFixed(2).padEnd(6))
-              // +  (x.VentaAnt && x.VentaAnt!.toFixed(2).padEnd(6))
-              // +  (x.IVAAnt && x.IVAAnt!.toFixed(2).padEnd(6))
-              // +  (x.MargenAnt && x.MargenAnt!.toFixed(2).padEnd(6))
-            
-            ).join("\n")
+        this.updates.push(new Update(nuevo, found));
+      }
+    }
+    for (const art of this.invoice.lineas) {
+      const found = this.catalog.productos.find(x => x.Referencia == art.Referencia);
+
+      //to-do : update catalog
+      if (found) {
+        let hasChanged = false;
+        const updated = new Producto({});
+        updated.id = found.id;
+        updated.Descripcion = found.Descripcion.replace("NNN ", "");
+        updated.Referencia = found.Referencia;
+        updated.PrecioCoste = found.PrecioCoste;
+        updated.PrecioVenta = found.PrecioVenta;
+        updated.IVA = found.IVA;
+        if (found.Descripcion.normalize("NFKD").replace(/[^\x00-\x7F]/g, "") != art.Articulo.normalize("NFKD").replace(/[^\x00-\x7F]/g, "")) {
+          updated.Descripcion = art.Articulo.replace("NNN ", "");
+          hasChanged = true;
+        }
+        if (found.PrecioCoste != art.Precio && art.Precio != 0) {
+          updated.PrecioCoste = art.Precio;
+          updated.PrecioVenta = Math.round(art.Precio * 1.20 * 100) / 100;
+          hasChanged = true;
+        }
+        if (found.IVA != art.IVA) {
+          updated.IVA = art.IVA;
+          hasChanged = true;
+        }
+        if (hasChanged)
+          this.updates.push(new Update(updated, found));
+      }
+    }
+    this.update.emit(this.updates);
   }
-
-  arrayToAlignedText(data: Record<string, any>[]): string {
-    if (data.length === 0) return "";
-
-    const headers = Object.keys(data[0]);
-
-    // Calcular el ancho máximo por columna
-    const columnWidths = headers.map(header =>
-      Math.max(header.length, ...data.map(row => String(row[header] ?? "").length))
-    );
-
-    // Formatear una fila
-    const formatRow = (row: Record<string, any>) =>
-      headers.map((header, i) => String(row[header] ?? "").padEnd(columnWidths[i])).join("  ");
-
-    // Construir la tabla
-    const headerLine = headers.map((h, i) => h.padEnd(columnWidths[i])).join("  ").trim();
-    const rows = data.map(formatRow);
-
-    return [headerLine, ...rows].join("\n");
-  }
-
-
 }

@@ -29,7 +29,6 @@ export class CatalogoComponent {
     this.callService();
   }
   callService(){
-    debugger;
     this.loading =true;
     this.odoo.getProducts()
     .pipe(

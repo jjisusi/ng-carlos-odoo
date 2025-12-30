@@ -1,9 +1,12 @@
 <h6>Consolidación de datos</h6>
-<ol>
-    <li>
+@if(updates.length){
+    <div>
         Pulse el botón para aceptar los cambios a consolidar. Los cambios se subirán a odoo
-        <p>
-            <button id="btnDownload" class="btn btn-primary" (click)="consolidate()">Consolidar datos</button>
+      <p>
+            <button id="btnDownload" class="btn btn-primary" (click)="consolidateUpdates()">Consolidar datos</button>
         </p>
-    </li>
-</ol>
+    </div>
+}
+@else{
+    No hay datos para consolidar
+}
