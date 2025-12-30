@@ -38,6 +38,12 @@ export class FacturaComponent {
       }
     })
   }
+  onPaste(event: ClipboardEvent) {
+    const txtInvoice = document.getElementById("txtInvoice") as HTMLInputElement;
+    const pastedText = event.clipboardData?.getData('text') || '';
+    txtInvoice.textContent=pastedText;
+    this.uploadInvoiceFromText();
+  }
 
   uploadInvoiceFromText() {
     const txtInvoice = document.getElementById("txtInvoice") as HTMLInputElement;

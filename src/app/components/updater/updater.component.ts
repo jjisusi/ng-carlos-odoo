@@ -2,7 +2,6 @@ import { Component, Input, input, output, Output } from '@angular/core';
 import { Update } from '../../models/Update';
 import { CommonModule } from '@angular/common';
 import { Factura } from '../../models/Invoice';
-import { INPUTNUMBER_VALUE_ACCESSOR } from 'primeng/inputnumber';
 import { Catalogo } from '../../models/catalogo';
 import { Producto } from '../../models/Producto';
 

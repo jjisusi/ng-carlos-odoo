@@ -1,6 +1,4 @@
 <div class="row">
-
-
     @for (producto of updates || []; track producto.New.id) {
     <div class="col-md-4">
         <table class="table table-stripped tabl-bordered">
@@ -9,6 +7,9 @@
                     <th class="text-left">Referencia</th>
                     <td class="text-left">
                         {{producto.New.Referencia}}
+                        @if(!producto.Old){
+                        <span class="badge bg-primary">N</span>
+                        }
                     </td>
                 </tr>
                 <tr>
@@ -17,7 +18,8 @@
                         <span>
                             {{producto.New.Descripcion}}
                         </span>
-                        <span class="text-decoration-line-through" *ngIf="producto.New.Descripcion!=producto.Old?.Descripcion">
+                        <span class="text-decoration-line-through"
+                            *ngIf="producto.New.Descripcion!=producto.Old?.Descripcion">
                             {{producto.Old?.Descripcion}}
                         </span>
                     </td>
@@ -26,16 +28,18 @@
                     <th class="text-left">Precio (coste)</th>
                     <td>
                         {{producto.New.PrecioCoste}}
-                        <span class="text-decoration-line-through" *ngIf="producto.New.PrecioCoste!=(producto.Old?.PrecioCoste || 0)">
+                        <span class="text-decoration-line-through"
+                            *ngIf="producto.New.PrecioCoste!=(producto.Old?.PrecioCoste || 0)">
                             {{producto.Old?.PrecioCoste}}
-                        </span> 
+                        </span>
                     </td>
                 </tr>
                 <tr>
                     <th class="text-left">Precio (venta)</th>
                     <td>
                         {{producto.New.PrecioVenta}}
-                        <span  class="text-decoration-line-through"  *ngIf="producto.New.PrecioVenta!=(producto.Old?.PrecioVenta||0)">
+                        <span class="text-decoration-line-through"
+                            *ngIf="producto.New.PrecioVenta!=(producto.Old?.PrecioVenta||0)">
                             {{producto.Old?.PrecioVenta}}
                         </span>
                     </td>
@@ -64,5 +68,5 @@
     }
 </div>
 @if(updates.length==0){
-    No hay cambios para consolidar en Odoo
+No hay cambios para consolidar en Odoo
 }

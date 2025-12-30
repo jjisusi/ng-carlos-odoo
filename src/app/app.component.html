@@ -21,7 +21,7 @@
             <p-tabpanel [value]="1">
                 <app-factura #invoiceRecognizer (parsed)="onInvoiceParsed($event)"></app-factura>
             </p-tabpanel>
-            <p-tabpanel [value]="2">
+            <p-tabpanel [value]="2" (valueChange)="onUpdaterTabChange()">
                 <app-updater #updater [catalog]="catalogo" [invoice]="factura" (update)="onUpdated($event)"></app-updater>
             </p-tabpanel>
             <p-tabpanel [value]="3">

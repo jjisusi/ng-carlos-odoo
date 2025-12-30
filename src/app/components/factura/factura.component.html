@@ -9,9 +9,11 @@
         Abre el pdf con la factura. Copia todo el contenido texto de la misma y pegalo en la siguiente caja.
     </p>
     <div class="row">
-        <div class="col-12 form-group">
-            <textarea id="txtInvoice" class="form-control" rows="5" (change)="uploadInvoiceFromText()"></textarea>
-            <input type="button" id="btnInvoice" (click)="uploadInvoiceFromText()" value="Extraer datos" />
+        <div class="col-12">
+            <textarea id="txtInvoice" class="form-control" rows="12" (change)="uploadInvoiceFromText()" (paste)="onPaste($event)"></textarea>
+        </div>
+        <div class="col-12">
+            <button type="button" class="btn btn-primary" id="btnInvoice" (click)="uploadInvoiceFromText()">Extraer datos de factura</button>
         </div>
     </div>
 </form>

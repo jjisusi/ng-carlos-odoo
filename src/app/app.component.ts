@@ -62,7 +62,10 @@ export class AppComponent {
       });
       this.updater.generateUpdates();
     }
-
+  }
+  onUpdaterTabChange(){
+    debugger;
+    this.onInvoiceParsed(this.factura);
   }
   onUpdated(updates: Update[]) {
     this.updates = updates;
