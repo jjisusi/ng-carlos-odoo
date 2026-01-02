@@ -28,7 +28,8 @@ export class FacturaComponent {
     if (!input.files) return;
     this.ocrService.uploadInvoice(input.files[0]).subscribe({
       next: (data) => {
-        txtInvoice.innerHTML += data;
+        txtInvoice.value = data.text;
+        this.uploadInvoiceFromText();
       },
       error: () => {
         this.messages.add({
@@ -38,12 +39,27 @@ export class FacturaComponent {
       }
     })
   }
+
+
   onPaste(event: ClipboardEvent) {
     const txtInvoice = document.getElementById("txtInvoice") as HTMLInputElement;
     const pastedText = event.clipboardData?.getData('text') || '';
-    txtInvoice.textContent=pastedText;
+    txtInvoice.textContent = pastedText;
     this.uploadInvoiceFromText();
   }
+separarLineasFactura(texto: string): string {
+  return texto
+    .replace(/\s+/g, " ") // todo a una sola línea, espacios simples
+    .trim()
+    // cortar antes de códigos de 1-5 dígitos seguidos de espacios y una letra mayúscula (inicio de producto)
+    .split(/ (?=\d{1,5}\s+[A-ZÁÉÍÓÚÑ])/g)
+    .map(l => l.trim())
+    // nos quedamos solo con lo que realmente parece una línea de producto
+    .filter(l => /^\d{1,5}\s+[A-ZÁÉÍÓÚÑ]/.test(l))
+    .join("\n");
+}
+
+
 
   uploadInvoiceFromText() {
     const txtInvoice = document.getElementById("txtInvoice") as HTMLInputElement;
@@ -85,7 +101,7 @@ export class FacturaComponent {
     const invoiceLines = [];
     const logs = [];
 
-    const regex = /^([A-Z\d]+)\s+(.+?)\s+(-?\d+)\s+(-?[\d.,]+)(?:\s+(-?[\d.,]+)\s*%?)?\s+(-?\d+)\s+(-?[\d.,]+)$/i;
+    const regex = /^(\d{1,5})\s+(.+?)\s+(\d+)\s+([\d.,]+)\s+(?:([\d.,]+)\s*%\s+)?([\d.,]+)\s+(\d{1,2})$/;
 
 
     for (let linea of lineas) {

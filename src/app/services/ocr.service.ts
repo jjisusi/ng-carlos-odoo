@@ -16,5 +16,5 @@ export class OcrService {
   uploadInvoice(file: File) { 
     const formData = new FormData(); 
     formData.append("file", file); 
-    return this.http.post(this.apiUrl + "/invoice", formData); }
+    return this.http.post<any>(this.apiUrl + "/invoice", formData); }
 }
