@@ -48,9 +48,7 @@ export class AppComponent {
       severity: 'success',
       detail: "El catálogo ha sido importado correctamente, puedes continuar al siguiente paso"
     });
-    setTimeout(() => {
-      this.currentTab = this.currentTab + 1;
-    }, 2000); // 5000 milisegundos = 5 segundos
+    this.currentTab = this.currentTab + 1;
 
   }
   onInvoiceParsed(factura: Factura): void {

@@ -5,14 +5,18 @@ import { FacturaLinea } from '../../models/InvoiceLine';
 import { OcrService } from '../../services/ocr.service';
 import { TableModule } from 'primeng/table';
 import { MessageService } from 'primeng/api';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { finalize } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-factura',
-  imports: [TableModule],
+  imports: [TableModule,ProgressSpinnerModule,CommonModule],
   templateUrl: './factura.component.html',
   styleUrl: './factura.component.scss'
 })
 export class FacturaComponent {
+  loading=false;
   factura: Factura = new Factura([]);
   parsed = output<Factura>();
   constructor(
@@ -26,10 +30,16 @@ export class FacturaComponent {
     const input = event.target as HTMLInputElement;
     const txtInvoice = document.getElementById("txtInvoice") as HTMLInputElement;
     if (!input.files) return;
-    this.ocrService.uploadInvoice(input.files[0]).subscribe({
+    this.loading=true;
+    this.ocrService.uploadInvoice(input.files[0])
+      .pipe(
+        finalize (()=>this.loading=false)
+      )
+      .subscribe({
       next: (data) => {
         txtInvoice.value = data.text;
         this.uploadInvoiceFromText();
+      
       },
       error: () => {
         this.messages.add({
@@ -110,7 +120,7 @@ separarLineasFactura(texto: string): string {
         ;
       let match = linea.trim().match(regex);
       if (match) {
-        const [_, codigo, articulo, cantidad, precio, descuento, iva, importe] = match;
+        const [_, codigo, articulo, cantidad, precio, descuento, importe, iva] = match;
         const producto = new FacturaLinea({
           Referencia: codigo.trim().replace(/a/gi, "4"),
           Articulo: articulo.trim().replace("NNN", ""),

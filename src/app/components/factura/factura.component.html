@@ -5,62 +5,65 @@
             <input class="d-block" type="file" id="fuInvoice" accept=".pdf" (change)="uploadInvoicePdf($event)" />
         </div>
     </div>
-    <p>
-        Abre el pdf con la factura. Copia todo el contenido texto de la misma y pegalo en la siguiente caja.
-    </p>
+    <div class="card flex justify-center" *ngIf="loading">
+        <p-progress-spinner strokeWidth="8" fill="transparent" animationDuration=".5s"
+            [style]="{ width: '50px', height: '50px' }" />
+    </div>
     <div class="row">
         <div class="col-12">
-            <textarea id="txtInvoice" class="form-control" rows="12" (change)="uploadInvoiceFromText()" (paste)="onPaste($event)"></textarea>
+            <textarea disabled id="txtInvoice" class="form-control" rows="12" (change)="uploadInvoiceFromText()"
+                (paste)="onPaste($event)"></textarea>
         </div>
         <div class="col-12">
-            <button type="button" class="btn btn-primary" id="btnInvoice" (click)="uploadInvoiceFromText()">Extraer datos de factura</button>
+            <button type="button" class="btn btn-primary" id="btnInvoice" (click)="uploadInvoiceFromText()">Extraer
+                datos de factura</button>
         </div>
     </div>
 </form>
 <div class="row">
-<div id="desglose" class="col-12 col-md-4">
-    <table class="table table-sm table-stripped">
-        <thead>
-            <th class="text-right">IVA</th>
-            <th class="text-right">Importe</th>
-            <th class="text-right">Cuota</th>
-            <th class="text-right">Total</th>
-        </thead>
-        <tbody>
-            @for (item of this.factura.Desglose; track item.IVA) {
-            <tr>
-                <td class="text-right">
-                    {{item.IVA}}
-                </td>
-                <td class="text-right">
-                    {{item.Importe.toFixed(2)}}
-                </td>
-                <td class="text-right">
-                    {{item.Cuota.toFixed(2)}}
-                </td>
-                <td class="text-right">
-                    {{item.Total?.toFixed(2)}}
-                </td>
-            </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <th class="text-right">
-                </th>
-                <th class="text-right">
+    <div id="desglose" class="col-12 col-md-4">
+        <table class="table table-sm table-stripped">
+            <thead>
+                <th class="text-right">IVA</th>
+                <th class="text-right">Importe</th>
+                <th class="text-right">Cuota</th>
+                <th class="text-right">Total</th>
+            </thead>
+            <tbody>
+                @for (item of this.factura.Desglose; track item.IVA) {
+                <tr>
+                    <td class="text-right">
+                        {{item.IVA}}
+                    </td>
+                    <td class="text-right">
+                        {{item.Importe.toFixed(2)}}
+                    </td>
+                    <td class="text-right">
+                        {{item.Cuota.toFixed(2)}}
+                    </td>
+                    <td class="text-right">
+                        {{item.Total?.toFixed(2)}}
+                    </td>
+                </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th class="text-right">
+                    </th>
+                    <th class="text-right">
 
-                </th>
-                <th class="text-right">
+                    </th>
+                    <th class="text-right">
 
-                </th>
-                <th class="text-right">
-                    {{this.factura.Total.toFixed(2)}}
-                </th>
-            </tr>
-        </tfoot>
-    </table>
-</div>
+                    </th>
+                    <th class="text-right">
+                        {{this.factura.Total.toFixed(2)}}
+                    </th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 </div>
 
 <div id="articles" class="table-responsive">
