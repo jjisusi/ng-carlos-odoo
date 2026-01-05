@@ -11,12 +11,12 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-factura',
-  imports: [TableModule,ProgressSpinnerModule,CommonModule],
+  imports: [TableModule, ProgressSpinnerModule, CommonModule],
   templateUrl: './factura.component.html',
   styleUrl: './factura.component.scss'
 })
 export class FacturaComponent {
-  loading=false;
+  loading = false;
   factura: Factura = new Factura([]);
   parsed = output<Factura>();
   constructor(
@@ -30,24 +30,25 @@ export class FacturaComponent {
     const input = event.target as HTMLInputElement;
     const txtInvoice = document.getElementById("txtInvoice") as HTMLInputElement;
     if (!input.files) return;
-    this.loading=true;
+    this.loading = true;
     this.ocrService.uploadInvoice(input.files[0])
       .pipe(
-        finalize (()=>this.loading=false)
+        finalize(() => this.loading = false)
       )
       .subscribe({
-      next: (data) => {
-        txtInvoice.value = data.text;
-        this.uploadInvoiceFromText();
-      
-      },
-      error: () => {
-        this.messages.add({
-          severity: 'error',
-          detail: "Error al subir factura productos. Consulte al servicio técnico de IsusiSoft"
-        });
-      }
-    })
+        next: (data) => {
+          debugger;
+          txtInvoice.value = data.text;
+          this.uploadInvoiceFromText();
+
+        },
+        error: () => {
+          this.messages.add({
+            severity: 'error',
+            detail: "Error al subir factura productos. Consulte al servicio técnico de IsusiSoft"
+          });
+        }
+      })
   }
 
 
@@ -57,17 +58,17 @@ export class FacturaComponent {
     txtInvoice.textContent = pastedText;
     this.uploadInvoiceFromText();
   }
-separarLineasFactura(texto: string): string {
-  return texto
-    .replace(/\s+/g, " ") // todo a una sola línea, espacios simples
-    .trim()
-    // cortar antes de códigos de 1-5 dígitos seguidos de espacios y una letra mayúscula (inicio de producto)
-    .split(/ (?=\d{1,5}\s+[A-ZÁÉÍÓÚÑ])/g)
-    .map(l => l.trim())
-    // nos quedamos solo con lo que realmente parece una línea de producto
-    .filter(l => /^\d{1,5}\s+[A-ZÁÉÍÓÚÑ]/.test(l))
-    .join("\n");
-}
+  separarLineasFactura(texto: string): string {
+    return texto
+      .replace(/\s+/g, " ") // todo a una sola línea, espacios simples
+      .trim()
+      // cortar antes de códigos de 1-5 dígitos seguidos de espacios y una letra mayúscula (inicio de producto)
+      .split(/ (?=\d{1,5}\s+[A-ZÁÉÍÓÚÑ])/g)
+      .map(l => l.trim())
+      // nos quedamos solo con lo que realmente parece una línea de producto
+      .filter(l => /^\d{1,5}\s+[A-ZÁÉÍÓÚÑ]/.test(l))
+      .join("\n");
+  }
 
 
 

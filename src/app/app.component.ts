@@ -58,11 +58,11 @@ export class AppComponent {
         severity: 'success',
         detail: "La factura ha sido procesada correctamente, puedes continuar al siguiente paso"
       });
+      this.updater.invoice=factura;
       this.updater.generateUpdates();
     }
   }
   onUpdaterTabChange(){
-    debugger;
     this.onInvoiceParsed(this.factura);
   }
   onUpdated(updates: Update[]) {
