@@ -66,7 +66,10 @@ export class AppComponent {
     this.onInvoiceParsed(this.factura);
   }
   onUpdated(updates: Update[]) {
-    this.updates = updates;
+    this.updates = updates.filter(x=>x.Active);
+  }
+  onConsolidatedTabChange(){
+    this.onUpdated(this.updates);
   }
   onConsolidated() {
     this.updates = [];

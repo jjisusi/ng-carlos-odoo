@@ -1,12 +1,56 @@
 <h6>Consolidación de datos</h6>
 @if(updates.length){
-    <div>
-        Pulse el botón para aceptar los cambios a consolidar. Los cambios se subirán a odoo
-      <p>
-            <button id="btnDownload" class="btn btn-primary" (click)="consolidateUpdates()">Consolidar datos</button>
-        </p>
-    </div>
+<div>
+    Pulse el botón para aceptar los cambios a consolidar. Los cambios se subirán a odoo
+    <p>
+        <button id="btnDownload" class="btn btn-primary" (click)="consolidateUpdates()">Consolidar datos</button>
+    </p>
+</div>
+
 }
 @else{
-    No hay datos para consolidar
+No hay datos para consolidar
 }
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>
+                Consolidar
+            </td>
+            <td>
+                Referencia
+            </td>
+            <td>
+                Descripcion
+            </td>
+            <td>
+                PrecioCoste
+            </td>
+            <td>
+                PrecioVenta
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @for (producto of updates; track producto.New.id) {
+        <tr>
+            <td>
+                {{producto.Active ? 'SI' : 'NO'}}
+            </td>
+            <td>
+                {{producto.New.Referencia}}
+            </td>
+            <td>
+                {{producto.New.Descripcion}}
+            </td>
+            <td>
+                {{producto.New.PrecioCoste}}
+            </td>
+            <td>
+                {{producto.New.PrecioVenta.toFixed(2)}}
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

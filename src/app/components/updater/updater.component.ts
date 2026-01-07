@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { Factura } from '../../models/Invoice';
 import { Catalogo } from '../../models/catalogo';
 import { Producto } from '../../models/Producto';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-updater',
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './updater.component.html',
   styleUrl: './updater.component.scss'
 })
@@ -47,7 +48,7 @@ export class UpdaterComponent {
         nuevo.Referencia = art.Referencia,
           nuevo.Descripcion = art.Articulo.replace("NNN ", ""),
           nuevo.PrecioCoste = art.Precio,
-          nuevo.PrecioVenta = Math.round(art.Precio * 1.20 * 100) / 100,
+          nuevo.Margen = 20,
           nuevo.IVA = art.IVA
 
         this.updates.push(new Update(nuevo, found));
@@ -64,15 +65,15 @@ export class UpdaterComponent {
         updated.Descripcion = found.Descripcion.replace("NNN ", "");
         updated.Referencia = found.Referencia;
         updated.PrecioCoste = found.PrecioCoste;
-        updated.PrecioVenta = found.PrecioVenta;
         updated.IVA = found.IVA;
+        updated.Margen = found.Margen;
         if (found.Descripcion.normalize("NFKD").replace(/[^\x00-\x7F]/g, "") != art.Articulo.normalize("NFKD").replace(/[^\x00-\x7F]/g, "")) {
           updated.Descripcion = art.Articulo.replace("NNN ", "");
           hasChanged = true;
         }
         if (found.PrecioCoste != art.Precio && art.Precio != 0) {
           updated.PrecioCoste = art.Precio;
-          updated.PrecioVenta = Math.round(art.Precio * 1.20 * 100) / 100;
+          updated.Margen=20;
           hasChanged = true;
         }
         if (found.IVA != art.IVA) {

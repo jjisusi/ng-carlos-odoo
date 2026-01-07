@@ -37,7 +37,6 @@ export class FacturaComponent {
       )
       .subscribe({
         next: (data) => {
-          debugger;
           txtInvoice.value = data.text;
           this.uploadInvoiceFromText();
 

@@ -22,7 +22,7 @@ export class ConsolidationComponent {
     }
   consolidateUpdates() {
     this.loading = true;
-    this.odooService.updateProduct(this.updates.map(x => x.New))
+    this.odooService.updateProduct(this.updates.filter(x=>x.Active).map(x => x.New))
       .pipe(finalize(() => this.loading = false))
       .subscribe({
         next: resp => {
