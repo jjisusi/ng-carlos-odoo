@@ -2,9 +2,9 @@ import { ApplicationConfig, LOCALE_ID, provideZoneChangeDetection } from '@angul
 import { provideRouter } from '@angular/router';
 import Aura from '@primeuix/themes/aura';
 
-import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
 import { MessageService } from 'primeng/api';
+import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [

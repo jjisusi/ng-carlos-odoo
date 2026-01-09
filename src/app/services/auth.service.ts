@@ -6,7 +6,7 @@ export class AuthService {
 
   initGoogleLogin(callback: () => void) {
     google.accounts.id.initialize({
-      client_id: 'TU_CLIENT_ID.apps.googleusercontent.com',
+      client_id: '210393336032-9urvcp1l2ko3qohd07th4hqclfur7hvn.apps.googleusercontent.com',
       callback: (response: any) => {
         this.handleCredential(response);
         callback();
