@@ -59,7 +59,7 @@ export class InvoiceParserService {
             const [_, codigo, articulo, cantidad, precio, descuento, iva, importe] = match;
             const producto = new FacturaLinea({
                 Referencia: codigo.trim().replace(/a/gi, "4"),
-                Articulo: articulo.trim().replace("NNN",""),
+                Articulo: articulo.trim().replace("NNN","").replace("TTT ",""),
                 Cantidad: parseInt(cantidad),
                 PrecioCoste: precio.replace(/,/g, '.').includes(".") ? parseFloat(precio.replace(/,/g, '.')) : parseFloat(precio.replace(/,/g, '.'))/100,
                 Descuento: descuento ? parseFloat(descuento) : 0,

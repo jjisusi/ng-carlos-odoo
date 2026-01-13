@@ -4,11 +4,14 @@ import { Update } from '../../models/Update';
 import { OdooExportService as OdooService } from '../../services/odoo-export.service';
 import { MessageService } from 'primeng/api';
 import { finalize } from 'rxjs';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-consolidation',
   templateUrl: './consolidation.html',
   styleUrl: './consolidation.scss',
+  imports:[ProgressSpinnerModule,CommonModule]
 })
 export class ConsolidationComponent {
     loading=false;

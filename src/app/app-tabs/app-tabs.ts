@@ -80,6 +80,7 @@ loading = false;
   onConsolidated() {
     this.updates = [];
     this.catalogComponent.callService();
+    this.updater.updates=this.updates;
     // this.onInvoiceParsed(this.factura);
   }
   procesarNovedades(items: Producto[]) {
