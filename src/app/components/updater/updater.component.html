@@ -33,7 +33,7 @@
                             *ngIf="producto.New.PrecioCoste!=(producto.Old?.PrecioCoste || 0)">
                             {{producto.Old?.PrecioCoste}}
                         </span>
-                        <span class="badge badge-danger" *ngIf="producto.New.PrecioCoste!=(producto.Old?.PrecioCoste || 0)">Baja precio</span>
+                        <span class="badge badge-danger" *ngIf="producto.New.PrecioCoste<(producto.Old?.PrecioCoste || 0)">Baja precio</span>
                     </td>
                 </tr>
                 <tr>
