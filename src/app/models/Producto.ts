@@ -17,9 +17,11 @@ export class Producto {
                 var taxes = (json["supplier_taxes_id"][0] || json["taxes_id"][0]);
                 if (taxes) {
                     if (taxes == 58 || taxes == 170) {
-                        this.IVA = 10
+                        this.IVA = 10;
                     } else if (taxes == 1 || taxes == 171) {
-                        this.IVA = 21
+                        this.IVA = 21;
+                    } else if (taxes == 2184 ) {
+                        this.IVA = 4;
                     } else {
                         this.IVA = 0;
                         console.warn(`El artículo ${this.Descripcion} tiene IVA cero!!`)
