@@ -1,9 +1,18 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 declare const google: any;
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private storageKey = 'user';
+// Lista blanca de correos permitidos 
+  private allowedEmails = [ 
+    'carvi65@gmail.com',
+    'jjisusi@gmail.com'
+  ];
 
+  public constructor(
+    private router:Router
+  ){}
   initGoogleLogin(callback: () => void) {
     google.accounts.id.initialize({
       client_id: '210393336032-9urvcp1l2ko3qohd07th4hqclfur7hvn.apps.googleusercontent.com',
@@ -39,9 +48,16 @@ export class AuthService {
     const raw = localStorage.getItem(this.storageKey);
     return raw ? JSON.parse(raw) : null;
   }
+  isAllowed(): boolean { 
+    const user = this.currentUser; 
+    console.log(this.currentUser);
+    return user && this.allowedEmails.includes(user.email); 
+  }
 
   logout() {
+    google.accounts.id.disableAutoSelect();
     localStorage.removeItem(this.storageKey);
+    this.router.navigate(['/login']);
   }
 }
 

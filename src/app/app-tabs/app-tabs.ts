@@ -13,6 +13,7 @@ import { Factura } from '../models/Invoice';
 import { Catalogo } from '../models/catalogo';
 import { MessageService } from 'primeng/api';
 import { OdooExportService } from '../services/odoo-export.service';
+import { NavBar } from '../nav-bar/nav-bar';
 
 @Component({
   selector: 'app-tabs',
@@ -24,7 +25,8 @@ import { OdooExportService } from '../services/odoo-export.service';
     UpdaterComponent, 
     Toast, 
     TabsModule, 
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    NavBar
   ],
   templateUrl: './app-tabs.component.html',
   styleUrl: './app-tabs.scss',

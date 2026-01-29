@@ -20,7 +20,7 @@ export class Producto {
                         this.IVA = 10;
                     } else if (taxes == 1 || taxes == 171) {
                         this.IVA = 21;
-                    } else if (taxes == 2184 ) {
+                    } else if (taxes == 2184 || taxes == 2196 ) {
                         this.IVA = 4;
                     } else {
                         this.IVA = 0;

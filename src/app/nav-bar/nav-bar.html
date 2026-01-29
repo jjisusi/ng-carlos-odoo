@@ -1,0 +1,13 @@
+<nav class="navbar">
+    <div class="left">
+        <span>Carlos-odoo</span>
+    </div>
+    @if(auth.currentUser){
+    <div class="right">
+        <span>{{ auth.currentUser.name }}</span>
+        <img [src]="auth.currentUser.picture" class="avatar" alt="avatar">
+        <button class="btn btn-primary" (click)="auth.logout()" title="Cerrar sesión"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+    </div>
+    }
+
+</nav>
