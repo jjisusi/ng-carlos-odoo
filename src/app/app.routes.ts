@@ -8,7 +8,6 @@ export const routes: Routes = [
     { 
         path: '',
         component:AppTabs ,
-        canActivate: [AuthGuard], 
-        //loadComponent: () => import('./app-tabs/app-tabs').then(m => m.AppTabs)
+        canActivate: [AuthGuard]
     } 
 ];
